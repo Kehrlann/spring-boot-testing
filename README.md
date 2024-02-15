@@ -34,6 +34,18 @@ Step 3:
 - [ ] View everyone's items (? admin feature ?)
 - [ ] Invite someone else to view some items
 
+## Demo notes
+
+### SpringBootTest is expensive!
+
+- Run the tests a couple of time for a baseline in timing
+- Duplicate the main test class a few times, show that the timing doesn't change
+- Add profiles and see the timing explode
+
+### WebMvcTest
+
+- Show that injecting a service into the controller means you need to provide it.
+
 ## References:
 
 - Testing: https://docs.spring.io/spring-boot/docs/3.2.2/reference/html/features.html#features.testing
