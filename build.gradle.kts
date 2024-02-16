@@ -36,4 +36,6 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    // If you want to run tests at full CPU, uncomment the line below
+    // maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
 }
