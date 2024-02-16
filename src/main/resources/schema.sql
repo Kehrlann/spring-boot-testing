@@ -1,0 +1,4 @@
+CREATE TABLE todo(
+    id BIGINT PRIMARY KEY NOT NULL,
+    text TEXT NOT NULL
+);

@@ -7,15 +7,22 @@ import org.springframework.stereotype.Service;
 @Service
 class TodoService {
 
-    public List<TodoItem> getTodos() {
-        return null;
-    }
+	private final TodoRepository todoRepository;
 
-    public void delete(long id) {
+	public TodoService(TodoRepository todoRepository) {
+		this.todoRepository = todoRepository;
+	}
 
-    }
+	public List<TodoItem> getTodos() {
+		return todoRepository.findAll();
+	}
 
-    public void addTodo(String text) {
+	public void delete(long id) {
+		todoRepository.deleteById(id);
+	}
 
-    }
+	public TodoItem addTodo(String text) {
+		return todoRepository.save(new TodoItem(null, text));
+	}
+
 }
