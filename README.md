@@ -21,9 +21,9 @@ Talk about TDD:
 Simple TODO list app. May or may not implement the following:
 
 Step 1:
-- [ ] Show a list of TODOs
-- [ ] Add
-- [ ] Delete
+- [x] Show a list of TODOs
+- [x] Add
+- [x] Delete
 
 Step 2:
 - [ ] Multi-user
@@ -45,6 +45,13 @@ Step 3:
 ### WebMvcTest
 
 - Show that injecting a service into the controller means you need to provide it.
+
+### TDD: London-style (outside-in)
+
+- TodoController that drives the API of the TodoService
+
+### TDD: Detroit-style (inside-out)
+
 
 ## References:
 
