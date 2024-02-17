@@ -3,16 +3,17 @@ package wf.garnier.springboottesting;
 import java.io.IOException;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -27,7 +28,20 @@ class TodoControllerTests {
 	@MockBean
 	private TodoService todoService;
 
+	@BeforeEach
+	void setUp() {
+		webClient.getCookieManager().clearCookies();
+	}
+
 	@Test
+	void noUser() throws IOException {
+		HtmlPage htmlPage = webClient.getPage("/");
+		var loginForm = htmlPage.getElementsByTagName("form").getFirst();
+		assertThat(loginForm.getTextContent()).contains("Please sign in");
+	}
+
+	@Test
+	@WithMockUser
 	void title() throws IOException {
 		HtmlPage htmlPage = webClient.getPage("/");
 		var title = htmlPage.getElementsByTagName("h1").getFirst().getTextContent();
@@ -35,6 +49,7 @@ class TodoControllerTests {
 	}
 
 	@Test
+	@WithMockUser
 	void noTodos() throws IOException {
 		HtmlPage htmlPage = webClient.getPage("/");
 		var todos = htmlPage.querySelectorAll(".todo");
@@ -42,6 +57,7 @@ class TodoControllerTests {
 	}
 
 	@Test
+	@WithMockUser
 	void hasTodos() throws IOException{
 		when(todoService.getTodos()).thenReturn(
 				List.of(
@@ -64,6 +80,7 @@ class TodoControllerTests {
 	}
 
 	@Test
+	@WithMockUser
 	void deleteTodo() throws IOException {
 		when(todoService.getTodos()).thenReturn(
 				List.of(
@@ -84,14 +101,14 @@ class TodoControllerTests {
 	}
 
 	@Test
+	@WithMockUser
 	void addTodo() throws IOException {
 		HtmlPage page = webClient.getPage("/");
-		page.<HtmlTextInput>querySelector("input[name=\"text\"]")
-				.type("Try adding things");
+		page.<HtmlTextInput>querySelector("input[name=\"text\"]").type("Try adding things");
 
-		page.getElementById("add-button")
-				.click();
+		page.getElementById("add-button").click();
 
 		verify(todoService).addTodo("Try adding things");
 	}
+
 }

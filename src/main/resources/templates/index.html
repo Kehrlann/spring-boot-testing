@@ -10,15 +10,17 @@
 <ul>
     <li th:each="todo: ${todos}" class="todo">
         <span th:text="${todo.text()}" data-role="content"></span>
-        <form th:action="'/todo/' + ${todo.id()} + '/delete'" method="POST" >
-        <button type="submit">Complete</button>
+        <form th:action="'/todo/' + ${todo.id()} + '/delete'" method="POST">
+            <input type="hidden" th:name="${_csrf.getParameterName()}" th:value="${_csrf.getToken()}">
+            <button type="submit">Complete</button>
         </form>
     </li>
 </ul>
 <h2>Add new todo</h2>
 <form action="/todo" method="POST">
     <label for="new-todo"></label>
-    <input type="text" name="text" id="new-todo" />
+    <input type="text" name="text" id="new-todo"/>
+    <input type="hidden" th:name="${_csrf.getParameterName()}" th:value="${_csrf.getToken()}">
     <button id="add-button" type="submit">Add todo</button>
 </form>
 </body>
