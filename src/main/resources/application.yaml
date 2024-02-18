@@ -2,3 +2,10 @@ spring:
   sql:
     init:
       mode: always
+#logging:
+#  level:
+#    org.springframework.security: TRACE
+server:
+  servlet:
+    session:
+      persistent: true
