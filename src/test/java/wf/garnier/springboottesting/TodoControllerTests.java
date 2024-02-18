@@ -57,13 +57,14 @@ class TodoControllerTests {
 	}
 
 	@Test
-	@WithMockUser
+	@WithMockUser("test-user")
 	void hasTodos() throws IOException{
-		when(todoService.getTodos()).thenReturn(
+		var username = "test-user";
+		when(todoService.getTodos(username)).thenReturn(
 				List.of(
-						new TodoItem(1L, "Do groceries"),
-						new TodoItem(2L, "Cook dinner"),
-						new TodoItem(3L, "Enjoy meal")
+						new TodoItem(1L, "Do groceries", username),
+						new TodoItem(2L, "Cook dinner", username),
+						new TodoItem(3L, "Enjoy meal", username)
 				));
 
 		HtmlPage htmlPage = webClient.getPage("/");
@@ -80,12 +81,13 @@ class TodoControllerTests {
 	}
 
 	@Test
-	@WithMockUser
+	@WithMockUser("test-user")
 	void deleteTodo() throws IOException {
-		when(todoService.getTodos()).thenReturn(
+		var username = "test-user";
+		when(todoService.getTodos(username)).thenReturn(
 				List.of(
-						new TodoItem(42L, "Do groceries"),
-						new TodoItem(25L, "Buy the thing")
+						new TodoItem(42L, "Do groceries", username),
+						new TodoItem(25L, "Buy the thing", username)
 				));
 
 		HtmlPage page = webClient.getPage("/");
@@ -97,18 +99,18 @@ class TodoControllerTests {
 				.querySelector("button");
 		deleteButton.click();
 
-		verify(todoService).delete(25);
+		verify(todoService).delete(25, username);
 	}
 
 	@Test
-	@WithMockUser
+	@WithMockUser("test-user")
 	void addTodo() throws IOException {
 		HtmlPage page = webClient.getPage("/");
 		page.<HtmlTextInput>querySelector("input[name=\"text\"]").type("Try adding things");
 
 		page.getElementById("add-button").click();
 
-		verify(todoService).addTodo("Try adding things");
+		verify(todoService).addTodo("Try adding things", "test-user");
 	}
 
 }

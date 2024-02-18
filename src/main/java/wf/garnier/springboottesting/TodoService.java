@@ -2,6 +2,7 @@ package wf.garnier.springboottesting;
 
 import java.util.List;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,16 +14,17 @@ class TodoService {
 		this.todoRepository = todoRepository;
 	}
 
-	public List<TodoItem> getTodos() {
-		return todoRepository.findAll();
+	public TodoItem addTodo(String text, String username) {
+		return todoRepository.save(new TodoItem(null, text, username));
 	}
 
-	public void delete(long id) {
-		todoRepository.deleteById(id);
+	public List<TodoItem> getTodos(String username) {
+		return todoRepository.findAllByUsername(username);
 	}
 
-	public TodoItem addTodo(String text) {
-		return todoRepository.save(new TodoItem(null, text));
+	@Transactional
+	public void delete(long id, String username) {
+		todoRepository.deleteTodoItemByIdAndUsername(id, username);
 	}
 
 }
