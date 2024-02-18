@@ -51,7 +51,7 @@ class TodoServiceTest {
 	}
 
 	@Test
-	void mulitpleUsers() {
+	void multipleUsers() {
 		var firstUsername = "alice";
 		var secondUsername = "bob";
 		todoService.addTodo("first", firstUsername);
