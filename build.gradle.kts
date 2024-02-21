@@ -1,5 +1,6 @@
 plugins {
     java
+    idea
     id("org.springframework.boot") version "3.3.0-M1"
     id("io.spring.dependency-management") version "1.1.4"
     id("io.spring.javaformat") version "0.0.41"
@@ -25,7 +26,7 @@ dependencies {
     implementation("org.springframework.security:spring-security-test")
 
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
-    developmentOnly("org.springframework.boot:spring-boot-dev-tools")
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
 
     runtimeOnly("org.postgresql:postgresql")
 
@@ -41,3 +42,47 @@ tasks.withType<Test> {
     // If you want to run tests at full CPU, uncomment the line below
     // maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
 }
+
+
+
+sourceSets {
+    create("integrationTest") {
+        java {
+            srcDirs("src/integration-tests")
+        }
+        compileClasspath += sourceSets.main.get().output
+        runtimeClasspath += sourceSets.main.get().output
+    }
+}
+
+val integrationTestImplementation by configurations.getting {
+    extendsFrom(configurations.implementation.get())
+    extendsFrom(configurations.testImplementation.get())
+}
+val integrationTestRuntimeOnly by configurations.getting
+
+configurations["integrationTestRuntimeOnly"].extendsFrom(configurations.runtimeOnly.get())
+
+val integrationTest = task<Test>("integrationTest") {
+    description = "Runs integration tests."
+    group = "verification"
+
+    testClassesDirs = sourceSets["integrationTest"].output.classesDirs
+    classpath = sourceSets["integrationTest"].runtimeClasspath
+    shouldRunAfter("test")
+
+    useJUnitPlatform()
+
+    testLogging {
+        events("passed")
+    }
+}
+
+tasks.check { dependsOn(integrationTest) }
+
+idea {
+    module {
+        testSources.from(sourceSets["integrationTest"].java.srcDirs)
+    }
+}
+
