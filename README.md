@@ -13,6 +13,29 @@
 - ✅ assertion libraries (assertJ / hamcrest / JSONAssert)
 - ✅ awaitility
 
+## Demo
+
+### `@SpringBootTest`
+
+Simple TODO app
+
+- H2 database
+- No security
+- No slow bean
+
+Show:
+
+1. `@SpringBootTest`
+2. WebClient / MockMvc with `@AutoConfigureMockMvc`
+    1. One is a browser
+    2. The other is more like a curl thing
+3. RandomPort
+    1. Sessions with `request.getSession()`
+
+---
+
+## ⬇️ Random notes
+
 Talk about TDD:
 
 - inside-out (Detroit, Classicist) vs outside-in (London, Mockist)
