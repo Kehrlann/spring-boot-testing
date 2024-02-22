@@ -23,7 +23,11 @@ class ShowcaseTests {
 	void awaitility() {
 		var random = new Random();
 		var counter = new AtomicInteger(0);
-		Awaitility.await().atMost(Duration.ofMillis(200)).pollInterval(Duration.ofMillis(10)).until(() -> {
+		Awaitility.await()
+				.atMost(Duration.ofMillis(200))
+				.pollDelay(Duration.ZERO)
+				.pollInterval(Duration.ofMillis(10))
+				.until(() -> {
 			var tryCount = counter.getAndIncrement();
 			System.out.println("Trying ... " + tryCount);
 			return random.nextInt(10) == 9;
