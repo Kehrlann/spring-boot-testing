@@ -16,6 +16,10 @@ public class TestSpringBootTestingApplication {
 		return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
 	}
 
+	/**
+	 * Launch the testing app, with TestContainers as the backing services.
+	 * @param args -
+	 */
 	public static void main(String[] args) {
 		SpringApplication.from(SpringBootTestingApplication::main)
 			.with(TestSpringBootTestingApplication.class)
