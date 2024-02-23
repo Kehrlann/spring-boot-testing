@@ -8,7 +8,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
 @TestConfiguration(proxyBeanMethods = false)
-public class TestSpringBootTestingApplication {
+public class TestTodoUsersApplication {
 
 	@Bean
 	@ServiceConnection
@@ -21,8 +21,8 @@ public class TestSpringBootTestingApplication {
 	 * @param args -
 	 */
 	public static void main(String[] args) {
-		SpringApplication.from(SpringBootTestingApplication::main)
-			.with(TestSpringBootTestingApplication.class)
+		SpringApplication.from(TodoUsersApplication::main)
+			.with(TestTodoUsersApplication.class)
 			.run(args);
 	}
 

@@ -21,10 +21,10 @@ import org.springframework.context.annotation.Import;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@Import(TestSpringBootTestingApplication.class)
+@Import(TestTodoUsersApplication.class)
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class SpringBootTestingApplicationTests {
+class TodoUsersApplicationTests {
 
 	@Test
 	void contextLoads() {
