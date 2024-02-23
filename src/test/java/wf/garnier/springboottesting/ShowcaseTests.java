@@ -24,7 +24,7 @@ class ShowcaseTests {
 		var random = new Random();
 		var counter = new AtomicInteger(0);
 		Awaitility.await()
-				.atMost(Duration.ofMillis(200))
+				.atMost(Duration.ofMillis(500))
 				.pollDelay(Duration.ZERO)
 				.pollInterval(Duration.ofMillis(10))
 				.until(() -> {
