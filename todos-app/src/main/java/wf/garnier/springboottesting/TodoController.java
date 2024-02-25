@@ -10,28 +10,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 class TodoController {
 
-    private final TodoService todoService;
+	private final TodoService todoService;
 
-    TodoController(TodoService todoService) {
-        this.todoService = todoService;
-    }
+	TodoController(TodoService todoService) {
+		this.todoService = todoService;
+	}
 
-    @GetMapping("/")
-    public String index(Model model) {
-        var todos = todoService.getTodos();
-        model.addAttribute("todos", todos);
-        return "/index";
-    }
+	@GetMapping("/")
+	public String index(Model model) {
+		var todos = todoService.getTodos();
+		model.addAttribute("todos", todos);
+		return "/index";
+	}
 
-    @PostMapping("/todo/{id}/delete")
-    public String delete(@PathVariable("id") Long id) {
-        todoService.delete(id);
-        return "redirect:/";
-    }
+	@PostMapping("/todo/{id}/delete")
+	public String delete(@PathVariable("id") Long id) {
+		todoService.delete(id);
+		return "redirect:/";
+	}
 
-    @PostMapping("/todo")
-    public String delete(@RequestParam("text") String text) {
-        todoService.addTodo(text);
-        return "redirect:/";
-    }
+	@PostMapping("/todo")
+	public String delete(@RequestParam("text") String text) {
+		todoService.addTodo(text);
+		return "redirect:/";
+	}
+
 }
