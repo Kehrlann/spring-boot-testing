@@ -24,7 +24,12 @@ dependencies {
 
     developmentOnly("org.springframework.boot:spring-boot-dev-tools")
 
-    runtimeOnly("com.h2database:h2")
+    developmentOnly("org.springframework.boot:spring-boot-docker-compose")
+
+    runtimeOnly("org.postgresql:postgresql")
+
+    testImplementation("org.springframework.boot:spring-boot-testcontainers")
+    testImplementation("org.testcontainers:postgresql")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.testcontainers:junit-jupiter")
