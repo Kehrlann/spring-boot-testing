@@ -12,3 +12,4 @@ server:
   servlet:
     session:
       persistent: true
+  port: 8081
