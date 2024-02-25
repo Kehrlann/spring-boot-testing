@@ -1,4 +1,4 @@
-package wf.garnier.springboottesting;
+package wf.garnier.springboottesting.todos.simple;
 
 import java.io.IOException;
 import java.util.UUID;

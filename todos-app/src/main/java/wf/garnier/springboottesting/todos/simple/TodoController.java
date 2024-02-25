@@ -1,4 +1,4 @@
-package wf.garnier.springboottesting;
+package wf.garnier.springboottesting.todos.simple;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
