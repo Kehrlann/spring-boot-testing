@@ -1,4 +1,4 @@
-package wf.garnier.springboottesting;
+package wf.garnier.springboottesting.todos.users;
 
 import java.util.List;
 

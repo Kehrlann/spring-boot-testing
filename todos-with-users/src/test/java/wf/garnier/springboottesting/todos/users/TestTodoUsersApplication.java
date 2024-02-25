@@ -1,4 +1,4 @@
-package wf.garnier.springboottesting;
+package wf.garnier.springboottesting.todos.users;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.TestConfiguration;

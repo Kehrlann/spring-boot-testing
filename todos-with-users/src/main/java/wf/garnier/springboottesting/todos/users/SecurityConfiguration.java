@@ -1,4 +1,4 @@
-package wf.garnier.springboottesting;
+package wf.garnier.springboottesting.todos.users;
 
 import jakarta.servlet.http.HttpSessionEvent;
 import jakarta.servlet.http.HttpSessionListener;

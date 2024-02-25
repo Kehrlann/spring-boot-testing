@@ -1,4 +1,4 @@
-package wf.garnier.springboottesting;
+package wf.garnier.springboottesting.todos.users;
 
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -72,7 +72,6 @@ class TodoServiceTest {
 		assertThat(todoService.getTodos(username)).isEmpty();
 	}
 
-
 	@Test
 	void deleteSomeoneElsesTodo() {
 		var username = "alice";
@@ -80,8 +79,7 @@ class TodoServiceTest {
 
 		todoService.delete(todo.id(), "bob");
 
-		assertThat(todoService.getTodos(username))
-				.hasSize(1)
-				.containsExactly(todo);
+		assertThat(todoService.getTodos(username)).hasSize(1).containsExactly(todo);
 	}
+
 }

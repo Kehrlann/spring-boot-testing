@@ -1,4 +1,4 @@
-package wf.garnier.springboottesting;
+package wf.garnier.springboottesting.todos.users;
 
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
