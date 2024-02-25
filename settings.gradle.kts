@@ -1,6 +1,6 @@
 rootProject.name = "spring-boot-testing"
 
-include("todos-with-users")
+include("todos-app", "todos-with-users")
 
 pluginManagement {
     repositories {
