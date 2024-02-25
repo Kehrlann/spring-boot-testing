@@ -10,3 +10,14 @@ server:
     session:
       persistent: true
   port: 8080
+
+# Tomcat access logs
+#  tomcat:
+#    accesslog:
+#      enabled: true
+#      directory: "/dev"
+#      prefix: "stdout"
+#      buffered: false
+#      suffix:
+#      file-date-format:
+#      pattern: "🕵️ user with IP [%h] requested [%U]. We responded with [%s]."
