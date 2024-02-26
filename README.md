@@ -10,8 +10,10 @@
 - 🚨 `@SpringBootTest`: mock mvc vs random port
 - ✅ Testcontainers
 - ✅ Security testing
-- ✅ assertion libraries (assertJ / hamcrest / JSONAssert)
-- ✅ awaitility
+- Utilities:
+    - ✅ assertion libraries (assertJ / hamcrest / JSONAssert)
+    - ✅ awaitility
+    - OutputCaptureExtension.class
 
 ## Demo
 
@@ -26,11 +28,45 @@ Simple TODO app
 Show:
 
 1. `@SpringBootTest`
-2. WebClient / MockMvc with `@AutoConfigureMockMvc`
-    1. One is a browser
-    2. The other is more like a curl thing
-3. RandomPort
-    1. Sessions with `request.getSession()`
+2. MockMvc with `@AutoConfigureMockMvc`
+3. WebClient
+4. RandomPort
+    1. Only when you need a full running container
+    2. E.g. when you want to connect to it
+    3. Or servlet-container things, e.g. tomcat logs
+
+### Slice tests
+
+Add a slow configuration bean
+
+Show that tests become expensive
+
+- `@DirtiesContext`
+- `@MockBean` / `@SpyBean`
+- `@Profile` or properties
+
+Showcase a slice test with `@WebMvcTest`
+Show that it requires providing dependencies.
+
+### Testcontainers
+
+Through start.spring.io, replace H2 with a "real" DB: Postgres.
+Add docker compose and testcontainers support.
+
+### Testing toolbox
+
+- assertJ
+- awaitility
+- JSON assert (and assertJ json assertions)
+- OutputCaptureExtension.class
+
+### Security testing
+
+Show the app with the users
+
+- `@WithMockUser`
+- Security processor when you have non-username-password authentications
+- 
 
 ---
 
