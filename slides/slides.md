@@ -48,7 +48,245 @@ Software Engineer
 
 1. 🕸️ `@SpringBootTest` and web testing
 1. 🍕 Slice tests: slimmer ApplicationContext
-1. 🧰 Testing toolbox: everything you need
-1. 🔐 Security testing: utility methods
 1. 🥸 A word on mocking
 1. 📦 Testcontainers
+1. 🧰 Testing toolbox: everything you need
+1. 🔐 Security testing: utility methods
+
+---
+layout: image-right
+image: /dep-tree-1.png
+---
+
+## Mocking
+
+A dependency tree
+
+---
+layout: image-right
+image: /dep-tree-2.png
+---
+
+## Mocking
+
+Obvious unit-tests
+
+---
+layout: image-right
+image: /dep-tree-3.png
+---
+
+## Mocking
+
+Obvious mocks
+
+---
+layout: image-right
+image: /dep-tree-3.png
+---
+
+## Mocking
+
+Obvious mocks
+
+<sub><i>(caveat: testcontainers!)</i></sub>
+
+---
+layout: image-right
+image: /dep-tree-4.png
+---
+
+## Mocking
+
+Non-obvious strategy ...
+
+
+---
+layout: image-right
+image: /dep-tree-5.png
+---
+
+## Mocking
+
+London-Style TDD
+- (aka Outside-In)
+- (aka Mockist)
+
+Lots of mocks, small units
+
+---
+layout: image-right
+image: /dep-tree-6.png
+---
+
+## Mocking
+
+London-Style TDD
+- (aka Outside-In)
+- (aka Mockist)
+
+Lots of mocks, small units
+
+---
+layout: image-right
+image: /dep-tree-7.png
+---
+
+## Mocking
+
+London-Style TDD
+- (aka Outside-In)
+- (aka Mockist)
+
+Lots of mocks, small units
+
+---
+layout: image-right
+image: /dep-tree-7.png
+---
+
+## Mocking
+
+London-Style TDD
+
+Advantages:
+- Small "units" in unit tests
+- Clear, focused tests
+
+Drawbacks:
+- Maintain mocks: expensive
+- Lack of "integration" tests
+
+---
+layout: image-right
+image: /dep-tree-8.png
+---
+
+## Mocking
+
+London-Style TDD
+
+Recommendation:
+- Delete mock tests
+- Add "bigger unit" tests, "component tests", "integration tests" (not fully e2e)
+
+---
+layout: image-right
+image: /dep-tree-9.png
+---
+
+## Mocking
+
+Detroit-Style TDD
+- (aka Inside-Out)
+- (aka Classicist)
+
+No mocks, real objects, bigger units
+
+---
+layout: image-right
+image: /dep-tree-10.png
+---
+
+## Mocking
+
+Detroit-Style TDD
+- (aka Inside-Out)
+- (aka Classicist)
+
+No mocks, real objects, bigger units
+
+---
+layout: image-right
+image: /dep-tree-11.png
+---
+
+## Mocking
+
+Detroit-Style TDD
+- (aka Inside-Out)
+- (aka Classicist)
+
+No mocks, real objects, bigger units
+
+---
+layout: image-right
+image: /dep-tree-12.png
+---
+
+## Mocking
+
+Detroit-Style TDD
+- (aka Inside-Out)
+- (aka Classicist)
+
+No mocks, real objects, bigger units
+
+---
+layout: image-right
+image: /dep-tree-13.png
+---
+
+## Mocking
+
+Detroit-Style TDD
+- (aka Inside-Out)
+- (aka Classicist)
+
+No mocks, real objects, bigger units
+
+---
+layout: image-right
+image: /dep-tree-14.png
+---
+
+## Mocking
+
+Detroit-Style TDD
+- (aka Inside-Out)
+- (aka Classicist)
+
+No mocks, real objects, bigger units
+
+---
+layout: image-right
+image: /dep-tree-14.png
+---
+
+## Mocking
+
+Detroit-Style TDD
+
+Advantages:
+- Decouple test from implementation, cheaper
+
+Drawbacks:
+- Bigger and bigger units
+- Complicated setup
+- Multiple classes under test
+
+
+---
+layout: image-right
+image: /dep-tree-8.png
+---
+
+## Mocking
+
+Detroit-Style TDD
+
+Recommendations:
+- Use TDD: start from the bottom
+- Add some mocks, sometimes
+
+
+---
+
+# Spring Boot Testing
+
+1. 🕸️ `@SpringBootTest` and web testing
+1. 🍕 Slice tests: slimmer ApplicationContext
+1. 🥸 A word on mocking
+1. 📦 Testcontainers
+1. 🧰 Testing toolbox: everything you need
+1. 🔐 Security testing: utility methods
