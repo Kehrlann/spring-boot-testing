@@ -63,8 +63,18 @@ Reach out:
 - <logos-twitter /> @Kehrlann
 - <fluent-emoji-flat-envelope-with-arrow /> daniel.garnier-moiroux@broadcom.com
 
-## 🤔 Questions?
+---
+layout: image-right
+image: /qr-code.png
+---
 
+# 🤔 Questions?
+
+<br>
+
+Also, feedback please 👉👉
+
+It helps a lot 🙇
 
 
 ---
