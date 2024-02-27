@@ -57,7 +57,7 @@ Add docker compose and testcontainers support.
 
 - assertJ
 - awaitility
-- JSON assert (and assertJ json assertions)
+- JSON assert (and assertJ json assertions) && BasicJsonTester
 - OutputCaptureExtension.class
 
 ### Security testing
@@ -66,7 +66,7 @@ Show the app with the users
 
 - `@WithMockUser`
 - Security processor when you have non-username-password authentications
-- 
+- `csrf`
 
 ---
 
