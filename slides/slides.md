@@ -48,10 +48,24 @@ Software Engineer
 
 1. 🕸️ `@SpringBootTest` and web testing
 1. 🍕 Slice tests: slimmer ApplicationContext
-1. 🥸 A word on mocking
 1. 📦 Testcontainers
 1. 🧰 Testing toolbox: everything you need
-1. 🔐 Security testing: utility methods
+1. 🔐 *Maybe* Security testing: utility methods
+1. 🥸 *Maybe* A word on mocking
+
+---
+
+Repo:
+- <logos-github-icon /> https://github.com/Kehrlann/spring-boot-testing
+
+Reach out:
+- <logos-mastodon-icon /> @Kehrlann@hachyderm.io
+- <logos-twitter /> @Kehrlann
+- <fluent-emoji-flat-envelope-with-arrow /> daniel.garnier-moiroux@broadcom.com
+
+## 🤔 Questions?
+
+
 
 ---
 layout: image-right
@@ -279,14 +293,3 @@ Recommendations:
 - Use TDD: start from the bottom
 - Add some mocks, sometimes
 
-
----
-
-# Spring Boot Testing
-
-1. 🕸️ `@SpringBootTest` and web testing
-1. 🍕 Slice tests: slimmer ApplicationContext
-1. 🥸 A word on mocking
-1. 📦 Testcontainers
-1. 🧰 Testing toolbox: everything you need
-1. 🔐 Security testing: utility methods
