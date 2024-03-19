@@ -10,6 +10,7 @@ server:
     session:
       persistent: true
   port: 8080
+  address: 127.0.0.1
 
 # Tomcat access logs
 #  tomcat:
