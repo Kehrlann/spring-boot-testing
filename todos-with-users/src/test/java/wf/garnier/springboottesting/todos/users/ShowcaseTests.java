@@ -51,7 +51,7 @@ class ShowcaseTests {
 		);
 		//@formatter:on
 
-		assertThat(characters).hasSize(3)
+		assertThat(characters).hasSize(4)
 			.filteredOn(c -> c.charClass.equals("Hobbit"))
 			.hasSize(2)
 			.extracting(Character::name)
