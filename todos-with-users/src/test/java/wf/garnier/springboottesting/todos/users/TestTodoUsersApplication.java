@@ -21,9 +21,7 @@ public class TestTodoUsersApplication {
 	 * @param args -
 	 */
 	public static void main(String[] args) {
-		SpringApplication.from(TodoUsersApplication::main)
-			.with(TestTodoUsersApplication.class)
-			.run(args);
+		SpringApplication.from(TodoUsersApplication::main).with(TestTodoUsersApplication.class).run(args);
 	}
 
 }

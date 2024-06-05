@@ -16,12 +16,12 @@ final class TodoItem {
 
 	private String username;
 
-    private String text;
+	private String text;
 
 	TodoItem(Long id, String text, String username) {
 		this.id = id;
 		this.username = username;
-        this.text = text;
+		this.text = text;
 	}
 
 	public TodoItem() {
@@ -46,15 +46,19 @@ final class TodoItem {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 
 		TodoItem todoItem = (TodoItem) o;
 
-		if (!Objects.equals(id, todoItem.id)) return false;
-		if (!Objects.equals(username, todoItem.username)) return false;
-        return Objects.equals(text, todoItem.text);
-    }
+		if (!Objects.equals(id, todoItem.id))
+			return false;
+		if (!Objects.equals(username, todoItem.username))
+			return false;
+		return Objects.equals(text, todoItem.text);
+	}
 
 	@Override
 	public int hashCode() {
@@ -63,4 +67,5 @@ final class TodoItem {
 		result = 31 * result + (text != null ? text.hashCode() : 0);
 		return result;
 	}
+
 }
