@@ -2,9 +2,6 @@ spring:
   sql:
     init:
       mode: always
-  docker:
-    compose:
-      file: compose.yaml
 #logging:
 #  level:
 #    org.springframework.security: TRACE
