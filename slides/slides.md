@@ -18,7 +18,7 @@ hideInToc: true
 
 ### Daniel Garnier-Moiroux
 
-AF-KLM Spring Meetup, 2024-02-27
+Paris Spring Meetup @ Arolla, 2024-06-05
 
 
 ---
@@ -32,14 +32,14 @@ class: smaller
 ### Garnier-Moiroux
 <br>
 
-Software Engineer
+Software Engineer @ Broadcom
 
-- <logos-spring-icon /> Broadcom+Tanzu+Spring
+- <logos-spring-icon /> Spring + Tanzu
 - <logos-mastodon-icon /> @Kehrlann@hachyderm.io
 - <logos-twitter /> @Kehrlann
 - <logos-firefox /> https://garnier.wf/
 - <logos-github-icon /> github.com/Kehrlann/
-- <fluent-emoji-flat-envelope-with-arrow /> daniel.garnier-moiroux@broadcom.com
+- <fluent-emoji-flat-envelope-with-arrow /> contact@garnier.wf
 
 
 ---
