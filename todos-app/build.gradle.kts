@@ -1,8 +1,8 @@
 plugins {
     java
-    id("org.springframework.boot") version "3.3.3"
-    id("io.spring.dependency-management") version "1.1.5"
-    id("io.spring.javaformat") version "0.0.41"
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
+    id("io.spring.javaformat")
 }
 
 group = "wf.garnier"
@@ -33,7 +33,7 @@ dependencies {
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.testcontainers:junit-jupiter")
-    testImplementation("net.sourceforge.htmlunit:htmlunit")
+    testImplementation("org.htmlunit:htmlunit")
 }
 
 tasks.withType<Test> {

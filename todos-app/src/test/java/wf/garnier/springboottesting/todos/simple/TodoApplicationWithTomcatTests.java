@@ -2,7 +2,7 @@ package wf.garnier.springboottesting.todos.simple;
 
 import java.io.IOException;
 
-import com.gargoylesoftware.htmlunit.WebClient;
+import org.htmlunit.WebClient;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

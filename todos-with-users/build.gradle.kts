@@ -1,8 +1,8 @@
 plugins {
     java
-    id("org.springframework.boot") version "3.3.0"
-    id("io.spring.dependency-management") version "1.1.5"
-    id("io.spring.javaformat") version "0.0.41"
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
+    id("io.spring.javaformat")
 }
 
 group = "wf.garnier"
@@ -24,7 +24,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
 
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
-    developmentOnly("org.springframework.boot:spring-boot-dev-tools")
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
 
     runtimeOnly("org.postgresql:postgresql")
 
@@ -33,7 +33,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")
-    testImplementation("net.sourceforge.htmlunit:htmlunit")
+    testImplementation("org.htmlunit:htmlunit")
 }
 
 tasks.withType<Test> {

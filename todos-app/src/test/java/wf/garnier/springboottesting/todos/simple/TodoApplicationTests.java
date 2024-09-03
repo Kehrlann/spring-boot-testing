@@ -2,11 +2,11 @@ package wf.garnier.springboottesting.todos.simple;
 
 import java.io.IOException;
 
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlButton;
-import com.gargoylesoftware.htmlunit.html.HtmlInput;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import org.htmlunit.WebClient;
+import org.htmlunit.html.DomNode;
+import org.htmlunit.html.HtmlButton;
+import org.htmlunit.html.HtmlInput;
+import org.htmlunit.html.HtmlPage;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
