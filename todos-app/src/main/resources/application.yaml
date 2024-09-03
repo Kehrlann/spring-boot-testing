@@ -4,7 +4,7 @@ spring:
       mode: always
   docker:
     compose:
-      file: compose.yaml
+      file: classpath:/compose.yaml
 #logging:
 #  level:
 #    org.springframework.security: TRACE
