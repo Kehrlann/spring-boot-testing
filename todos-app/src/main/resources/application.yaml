@@ -5,6 +5,8 @@ spring:
   docker:
     compose:
       file: classpath:/compose.yaml
+  thymeleaf:
+    cache: false
 #logging:
 #  level:
 #    org.springframework.security: TRACE
