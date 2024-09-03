@@ -17,24 +17,39 @@ Anti-goals:
 
 ## Want to show
 
-- assertJ
-    - custom assertions
-- Awaitility
-- MockMvc
-- MockMvc with assertJ
-- WebClient (HtmlUnit)
+- Tools
+    - assertJ
+        - custom assertions
+    - Awaitility
+    - (?) JSON testing
+
+- Testing builtins
+    - @TestConfiguration
+    - Mention MockBean/SpyBean
+    - Output capture
+
+- Web testing
+    - MockMvc
+    - WebClient (HtmlUnit)
+    - MockMvc with assertJ
+
 - Slice tests
     - WebMvcTests
     - JpaTests
+    - CustomSliceTests
+
 - SpringApplicationBuilder
+
 - Spring bean validation testing
+
 - Security testing
-- @TestConfiguration
+
 - JUnit extensions
 - Wiremock
-- Mention MockBean/SpyBean
 
-## Test this
+## Explore this
 
+- Reactive tests
+- Custom slice test
 - Spring Batch tests
-- Testcontainers lifecycle with JUnit 5
+- Testcontainers lifecycle with JUnit 5.1
