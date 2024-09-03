@@ -34,6 +34,7 @@ Anti-goals:
     - MockMvc with assertJ
 
 - Slice tests
+    - @SpringBootTest with classes
     - WebMvcTests
     - JpaTests
     - CustomSliceTests
@@ -50,6 +51,6 @@ Anti-goals:
 ## Explore this
 
 - Reactive tests
-- Custom slice test
+- Custom slice test: custom mockmvc
 - Spring Batch tests
 - Testcontainers lifecycle with JUnit 5.1
