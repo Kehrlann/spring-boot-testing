@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8"/>
     <title>TODO list</title>
+    <style>
+        input:invalid {
+            border: 2px dashed red;
+        }
+    </style>
+    <script src="/validation.js"></script>
 </head>
 <body>
 <h1>TODO</h1>
@@ -16,7 +22,7 @@
     </li>
 </ul>
 <h2>Add new todo</h2>
-<form action="/todo" method="POST">
+<form action="/todo" method="POST" id="new-todo-form">
     <label for="new-todo"></label>
     <input type="text" name="text" id="new-todo"/>
     <button id="add-button" type="submit">Add todo</button>
