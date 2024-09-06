@@ -14,6 +14,26 @@ Anti-goals:
 
 ## General flow
 
+Start with a simple TODOs app.
+
+### `@SpringBootTest` out of the box
+
+For API testing:
+
+- `MockMvc`
+  - `.get(...)`
+  - `.post(...).param(..., ...)`
+
+For web-based testing:
+
+- `WebClient` from `org.htmlunit:htmlunit`:
+  - `.click()`
+  - It also supports Javascript ... but not all of Javascript.
+  - Use Selenium in that case.
+
+### `@SpringBootTest` with Tomcat
+
+- Show logging valve
 
 ## Want to show
 
