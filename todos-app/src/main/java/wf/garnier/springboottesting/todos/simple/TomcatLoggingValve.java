@@ -26,6 +26,7 @@ class TomcatLoggingValve extends ValveBase {
 		var status = ((HttpServletResponse) response).getStatus();
 		logger.info("🕵️ user with IP [{}] requested [{}]. We responded with [{}].", request.getRemoteAddr(),
 				request.getRequestURI(), status);
+		getNext().invoke(request, response);
 	}
 
 }
