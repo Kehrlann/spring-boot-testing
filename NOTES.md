@@ -34,6 +34,8 @@ For web-based testing:
 ### `@SpringBootTest` with Tomcat
 
 - Show logging valve
+- How it shows in the test
+- How to debug a running test ("breakpoint > suspend > thread")
 
 ## Want to show
 
