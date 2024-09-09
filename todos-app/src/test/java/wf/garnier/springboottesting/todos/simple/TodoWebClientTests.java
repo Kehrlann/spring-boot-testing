@@ -15,18 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.assertj.core.api.Assertions.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @Import(ContainersConfiguration.class)
-class TodoApplicationTests {
-
-	@Autowired
-	MockMvc mockMvc;
+class TodoWebClientTests {
 
 	@Autowired
 	WebClient webClient;
@@ -43,56 +37,44 @@ class TodoApplicationTests {
 	}
 
 	@Test
-	void displaysTodo() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.post("/todo").param("text", "this is a todo"))
-			.andExpect(status().is3xxRedirection());
-
-		mockMvc.perform(MockMvcRequestBuilders.get("/"))
-			.andExpect(xpath("//*[@data-role=\"text\"]").string("this is a todo"));
-	}
-
-	@Test
-	void loadsWithBrowser() throws IOException {
+	void addTodo() throws IOException {
 		HtmlPage page = webClient.getPage("/");
 
 		HtmlInput input = page.querySelector("form > input");
+		HtmlTextArea textArea = page.querySelector("form > textarea");
 		HtmlButton button = (HtmlButton) page.getElementById("add-button");
 
 		input.type("this is a todo");
+		textArea.type("and it has a description");
 		page = button.click();
 
-		var addedToto = page.querySelector(".todo > [data-role=\"text\"]").getTextContent();
-		assertThat(addedToto).isEqualTo("this is a todo");
+		var todoText = page.querySelector(".todo > [data-role=\"text\"]").getTextContent();
+		var todoDescription = page.querySelector(".todo > [data-role=\"description\"]").getTextContent();
+		assertThat(todoText).isEqualTo("this is a todo");
+		assertThat(todoDescription).isEqualTo("and it has a description");
 	}
 
 	@Test
-	void browserOnlyJavascript() throws IOException {
+	void completeTodo() throws IOException {
+		todoService.addTodo("new todo", null);
+
 		HtmlPage page = webClient.getPage("/");
 
-		HtmlInput input = page.querySelector("form > input");
-		HtmlTextArea textarea = page.querySelector("form > textarea");
-		HtmlButton button = (HtmlButton) page.getElementById("add-button");
+		HtmlButton completeTodo = page.querySelector(".todo > form > button");
+		page = completeTodo.click();
 
-		input.type("This is a todo with a description");
-		textarea.type("""
-				This is a nice description which tells you what the TODO item is about.
-				Useful, innit??
-				""");
-		page = button.click();
+		assertThat(page.querySelectorAll(".todo")).isEmpty();
+	}
 
-		var todoItem = page.querySelectorAll(".todo")
-			.stream()
-			.filter(node -> node.querySelector("[data-role=\"text\"]")
-				.getTextContent()
-				.equals("This is a todo with a description"))
-			.findFirst()
-			.get();
+	@Test
+	void noDescription() throws IOException {
+		todoService.addTodo("new todo", null);
 
-		var description = todoItem.querySelector("[data-role=\"description\"]");
-		assertThat(description.isDisplayed()).isFalse();
+		HtmlPage page = webClient.getPage("/");
 
-		todoItem.<HtmlButton>querySelector("[data-role=\"toggle\"]").click();
-		assertThat(description.isDisplayed()).isTrue();
+		HtmlButton toggleButton = page.querySelector(".todo > [data-role=\"toggle\"]");
+
+		assertThat(toggleButton.isDisabled()).isTrue();
 	}
 
 	@Test
