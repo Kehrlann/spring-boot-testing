@@ -11,4 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     )
 
+    document.getElementById("clear-button").addEventListener("click", (evt) => {
+        evt.preventDefault();
+        window.location.href = "/";
+    })
+
 })

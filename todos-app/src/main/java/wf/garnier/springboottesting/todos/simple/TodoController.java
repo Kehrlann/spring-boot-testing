@@ -2,6 +2,7 @@ package wf.garnier.springboottesting.todos.simple;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +18,8 @@ class TodoController {
 	}
 
 	@GetMapping("/")
-	public String index(Model model) {
-		var todos = todoService.getTodos();
+	public String index(@RequestParam(value = "q", required = false) String query, Model model) {
+		var todos = StringUtils.hasLength(query) ? todoService.searchByKeyword(query) : todoService.getTodos();
 		model.addAttribute("todos", todos);
 		return "/index";
 	}

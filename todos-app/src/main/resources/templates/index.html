@@ -25,9 +25,12 @@
 
         .description {
             display: none;
+            grid-column: 1 / 4;
+            background: #eee;
+            padding: 10px 5px;
         }
     </style>
-    <script src="/toggle.js"></script>
+    <script src="/todo.js"></script>
 </head>
 <body>
 <h1>TODO</h1>
@@ -54,5 +57,14 @@
 
     <button id="add-button" type="submit">Add todo</button>
 </form>
+
+<h2>Search todos</h2>
+<form action="/" method="GET">
+    <label for="search-input">Search by:</label>
+    <input type="text" name="q" id="search-input" th:value="${param.q}"/>
+    <button id="search-button" type="submit">Search!</button>
+    <button id="clear-button" >Clear!</button>
+</form>
+
 </body>
 </html>

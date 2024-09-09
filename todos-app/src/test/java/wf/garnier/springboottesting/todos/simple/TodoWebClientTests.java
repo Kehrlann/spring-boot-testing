@@ -3,6 +3,7 @@ package wf.garnier.springboottesting.todos.simple;
 import java.io.IOException;
 
 import org.htmlunit.WebClient;
+import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlButton;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlInput;
@@ -87,13 +88,40 @@ class TodoWebClientTests {
 		HtmlPage page = webClient.getPage("/");
 
 		HtmlElement description = page.querySelector("[data-role=\"description\"]");
-		HtmlButton toggler = page.querySelector("[data-role=\"toggle\"]");
-
 		assertThat(description.isDisplayed()).isFalse();
 
-		toggler.click();
+		page.<HtmlButton>querySelector("[data-role=\"toggle\"]").click();
 
 		assertThat(description.isDisplayed()).isTrue();
+	}
+
+	@Test
+	void searchTodo() throws IOException {
+		todoService.addTodo("Secure todo", "This is top secret");
+		todoService.addTodo("Open todo", "Everyone can see this");
+		todoService.addTodo("A todo", "Should this be secured?");
+
+		HtmlPage page = webClient.getPage("/");
+		page.<HtmlInput>querySelector("#search-input").type("secure");
+		page = page.getElementById("search-button").click();
+
+		var todos = page.querySelectorAll("[data-role=\"text\"]").stream().map(DomNode::getTextContent);
+
+		assertThat(todos).hasSize(2).containsExactlyInAnyOrder("A todo", "Secure todo");
+	}
+
+	@Test
+	void clearSearch() throws IOException {
+		todoService.addTodo("Secure todo", "This is top secret");
+		todoService.addTodo("Open todo", "Everyone can see this");
+		todoService.addTodo("A todo", "Should this be secured?");
+
+		HtmlPage page = webClient.getPage("/?q=secure");
+		page = page.getElementById("clear-button").click();
+
+		var todos = page.querySelectorAll("[data-role=\"text\"]").stream().map(DomNode::getTextContent);
+
+		assertThat(todos).hasSize(3);
 	}
 
 }
