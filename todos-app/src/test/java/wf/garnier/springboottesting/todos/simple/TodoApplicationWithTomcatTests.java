@@ -50,7 +50,7 @@ class TodoApplicationWithTomcatTests {
 		input.type("this is a todo");
 		page = button.click();
 
-		var addedToto = page.querySelector(".todo > [data-role=\"content\"]").getTextContent();
+		var addedToto = page.querySelector(".todo > [data-role=\"text\"]").getTextContent();
 		assertThat(addedToto).isEqualTo("this is a todo");
 	}
 

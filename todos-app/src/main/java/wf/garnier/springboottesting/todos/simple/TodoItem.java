@@ -16,9 +16,11 @@ final class TodoItem {
 
 	private String text;
 
-	TodoItem(Long id, String text) {
-		this.id = id;
+	private String description;
+
+	TodoItem(String text, String description) {
 		this.text = text;
+		this.description = description;
 	}
 
 	public TodoItem() {
@@ -33,6 +35,10 @@ final class TodoItem {
 		return text;
 	}
 
+	public String description() {
+		return this.description;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -41,16 +47,15 @@ final class TodoItem {
 			return false;
 
 		TodoItem todoItem = (TodoItem) o;
-
-		if (!Objects.equals(id, todoItem.id))
-			return false;
-		return Objects.equals(text, todoItem.text);
+		return Objects.equals(id, todoItem.id) && Objects.equals(text, todoItem.text)
+				&& Objects.equals(description, todoItem.description);
 	}
 
 	@Override
 	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (text != null ? text.hashCode() : 0);
+		int result = Objects.hashCode(id);
+		result = 31 * result + Objects.hashCode(text);
+		result = 31 * result + Objects.hashCode(description);
 		return result;
 	}
 

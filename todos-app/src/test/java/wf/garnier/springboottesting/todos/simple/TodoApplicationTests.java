@@ -3,10 +3,12 @@ package wf.garnier.springboottesting.todos.simple;
 import java.io.IOException;
 
 import org.htmlunit.WebClient;
-import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlButton;
+import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlInput;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.html.HtmlTextArea;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,17 +31,24 @@ class TodoApplicationTests {
 	@Autowired
 	WebClient webClient;
 
-	@Test
-	void contextLoads() {
+	@Autowired
+	TodoService todoService;
+
+	@Autowired
+	TodoRepository todoRepository;
+
+	@BeforeEach
+	void setUp() {
+		todoRepository.deleteAll();
 	}
 
 	@Test
-	void loads() throws Exception {
+	void displaysTodo() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.post("/todo").param("text", "this is a todo"))
 			.andExpect(status().is3xxRedirection());
 
 		mockMvc.perform(MockMvcRequestBuilders.get("/"))
-			.andExpect(xpath("//*[@data-role=\"content\"]").string("this is a todo"));
+			.andExpect(xpath("//*[@data-role=\"text\"]").string("this is a todo"));
 	}
 
 	@Test
@@ -52,22 +61,57 @@ class TodoApplicationTests {
 		input.type("this is a todo");
 		page = button.click();
 
-		var addedToto = page.querySelector(".todo > [data-role=\"content\"]").getTextContent();
+		var addedToto = page.querySelector(".todo > [data-role=\"text\"]").getTextContent();
 		assertThat(addedToto).isEqualTo("this is a todo");
 	}
 
 	@Test
-	void itDoesJavascript() throws IOException {
+	void browserOnlyJavascript() throws IOException {
 		HtmlPage page = webClient.getPage("/");
 
 		HtmlInput input = page.querySelector("form > input");
+		HtmlTextArea textarea = page.querySelector("form > textarea");
 		HtmlButton button = (HtmlButton) page.getElementById("add-button");
 
-		input.type("this is an INVALID todo");
+		input.type("This is a todo with a description");
+		textarea.type("""
+				This is a nice description which tells you what the TODO item is about.
+				Useful, innit??
+				""");
 		page = button.click();
 
-		var allTodos = page.querySelectorAll(".todo > [data-role=\"content\"]").stream().map(DomNode::getTextContent);
-		assertThat(allTodos).doesNotContain("this is an INVALID todo");
+		var todoItem = page.querySelectorAll(".todo")
+			.stream()
+			.filter(node -> node.querySelector("[data-role=\"text\"]")
+				.getTextContent()
+				.equals("This is a todo with a description"))
+			.findFirst()
+			.get();
+
+		var description = todoItem.querySelector("[data-role=\"description\"]");
+		assertThat(description.isDisplayed()).isFalse();
+
+		todoItem.<HtmlButton>querySelector("[data-role=\"toggle\"]").click();
+		assertThat(description.isDisplayed()).isTrue();
+	}
+
+	@Test
+	void javascriptToggle() throws IOException {
+		todoService.addTodo("new todo", """
+				this is a todo that will showcase toggling visibility
+				very cool!
+				""");
+
+		HtmlPage page = webClient.getPage("/");
+
+		HtmlElement description = page.querySelector("[data-role=\"description\"]");
+		HtmlButton toggler = page.querySelector("[data-role=\"toggle\"]");
+
+		assertThat(description.isDisplayed()).isFalse();
+
+		toggler.click();
+
+		assertThat(description.isDisplayed()).isTrue();
 	}
 
 }

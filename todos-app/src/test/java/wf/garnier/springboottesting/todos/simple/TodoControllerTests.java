@@ -1,17 +1,14 @@
 package wf.garnier.springboottesting.todos.simple;
 
 import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest
 class TodoControllerTests {
@@ -25,10 +22,22 @@ class TodoControllerTests {
 	@Test
 	void deleteTodo() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.post("/todo/25/delete"))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(redirectedUrl("/"));
+			.andExpect(status().is3xxRedirection())
+			.andExpect(redirectedUrl("/"));
 
 		verify(todoService).delete(25);
+	}
+
+	@Test
+	void addTodo() throws Exception {
+		mockMvc
+			.perform(MockMvcRequestBuilders.post("/todo")
+				.param("text", "Test todo")
+				.param("description", "This is a test todo, and it's fun!"))
+			.andExpect(status().is3xxRedirection())
+			.andExpect(redirectedUrl("/"));
+
+		verify(todoService).addTodo("Test todo", "This is a test todo, and it's fun!");
 	}
 
 }

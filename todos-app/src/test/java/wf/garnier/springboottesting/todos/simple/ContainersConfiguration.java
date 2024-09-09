@@ -8,10 +8,10 @@ import org.testcontainers.containers.PostgreSQLContainer;
 @TestConfiguration
 class ContainersConfiguration {
 
-    @ServiceConnection
-    @Bean
-    PostgreSQLContainer<?> postgreSQLContainer() {
-        return new PostgreSQLContainer<>("postgres:latest");
-    }
+	@ServiceConnection
+	@Bean
+	PostgreSQLContainer<?> postgreSQLContainer() {
+		return new PostgreSQLContainer<>("postgres:latest");
+	}
 
 }

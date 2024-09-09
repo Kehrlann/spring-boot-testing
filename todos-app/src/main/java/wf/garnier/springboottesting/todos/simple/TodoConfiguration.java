@@ -18,7 +18,7 @@ class TodoConfiguration {
 	record SlowStartingBean() {
 	}
 
-	@Bean
+	// @Bean
 	public SlowStartingBean slowStartingBean() throws InterruptedException {
 		logger.info("🐌 ... configuring ...");
 		Thread.sleep(Duration.ofSeconds(1));

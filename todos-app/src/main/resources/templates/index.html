@@ -7,24 +7,51 @@
         input:invalid {
             border: 2px dashed red;
         }
+
+        #new-todo-form {
+            display: flex;
+            flex-flow: column;
+            max-width: 300px;
+        }
+
+        .todo {
+            max-width: 280px;
+            display: grid;
+            grid-template-columns: 1fr min-content min-content;
+            column-gap: 5px;
+            row-gap: 5px;
+            margin-bottom: 5px;
+        }
+
+        .description {
+            display: none;
+        }
     </style>
-    <script src="/validation.js"></script>
+    <script src="/toggle.js"></script>
 </head>
 <body>
 <h1>TODO</h1>
 
 <ul>
-    <li th:each="todo: ${todos}" class="todo">
-        <span th:text="${todo.text()}" data-role="content"></span>
-        <form th:action="'/todo/' + ${todo.id()} + '/delete'" method="POST">
-            <button type="submit">Complete</button>
-        </form>
+    <li th:each="todo: ${todos}">
+        <div class="todo">
+            <span th:text="${todo.text()}" data-role="text"></span>
+            <button th:disabled="${todo.description() == null || todo.description().isEmpty()}" data-role="toggle">&lt;&gt;</button>
+            <form th:action="'/todo/' + ${todo.id()} + '/delete'" method="POST">
+                <button type="submit">Complete</button>
+            </form>
+            <span th:text="${todo.description()}" data-role="description" class="description"></span>
+        </div>
     </li>
 </ul>
 <h2>Add new todo</h2>
 <form action="/todo" method="POST" id="new-todo-form">
-    <label for="new-todo"></label>
-    <input type="text" name="text" id="new-todo"/>
+    <label for="new-todo">Title</label>
+    <input type="text" name="text" id="new-todo" required="true"/>
+
+    <label for="new-todo-description">Description</label>
+    <textarea name="description" id="new-todo-description"></textarea>
+
     <button id="add-button" type="submit">Add todo</button>
 </form>
 </body>
