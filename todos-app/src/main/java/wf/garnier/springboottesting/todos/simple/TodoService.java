@@ -28,4 +28,8 @@ class TodoService {
 		return todoRepository.save(new TodoItem(text, description));
 	}
 
+	public List<TodoItem> searchByKeyword(String keyword) {
+		return todoRepository.searchByKeyword(keyword);
+	}
+
 }
