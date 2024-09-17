@@ -1,9 +1,13 @@
 package wf.garnier.springboottesting.todos.simple;
 
+import java.time.Duration;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.testcontainers.shaded.org.awaitility.Awaitility;
 
 import static wf.garnier.springboottesting.todos.simple.Assertions.assertThat;
 import static wf.garnier.springboottesting.todos.simple.Assertions.assertThatLog;
@@ -33,9 +37,46 @@ class ToolsTests {
 		}
 
 		@Test
+		void awaitility() {
+			var dice = new Dice(20);
+			var count = new AtomicInteger(1);
+
+			//@formatter:off
+			Awaitility.await()
+					.timeout(Duration.ofSeconds(2))
+					.pollInterval(Duration.ofMillis(10))
+					.untilAsserted(() -> {
+						var result = dice.next();
+						System.out.printf("Throw #%s - got %s%n", count.getAndIncrement(), result);
+						assertThat(result).isEqualTo(dice.maxValue());
+					});
+			//@formatter:on;
+		}
+
+		@Test
 		void assertions() {
 			assertThatLog("🕵️ user with IP [127.0.0.1] requested [/todo.js]. We responded with [200].")
 				.hasIp("127.0.0.1");
+		}
+
+		static class Dice {
+
+			private final int sides;
+
+			private final Random random = new Random();
+
+			public Dice(int sides) {
+				this.sides = sides;
+			}
+
+			public int next() {
+				return this.random.nextInt(1, this.sides + 1);
+			}
+
+			public int maxValue() {
+				return this.sides;
+			}
+
 		}
 
 	}
