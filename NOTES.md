@@ -16,6 +16,7 @@ Anti-goals:
 
 Start with a simple TODOs app.
 
+
 ### `@SpringBootTest` out of the box
 
 For API testing:
@@ -31,11 +32,46 @@ For web-based testing:
   - It also supports Javascript ... but not all of Javascript.
   - Use Selenium in that case.
 
+
 ### `@SpringBootTest` with Tomcat
 
 - Show logging valve
 - How it shows in the test
 - How to debug a running test ("breakpoint > suspend > thread")
+
+
+### Test context caching
+
+- Add a bunch of tests modeled after WebMvc tests
+- Add a slow bean
+- Show that the cache works
+- Change the tests and make them slightly different (profile, properties, MockBean)
+    - terribly slow with the cache misses
+
+### Slices!
+
+- WebMvc slice
+- DataJPA Slice
+    - See the "search" filter
+    - not the right database (h2 vs postgres)
+
+
+### Take a break with tools
+
+- Awaitility
+- AssertJ
+- Custom assertionsCustom assertions
+
+
+### Testcontainers
+
+- Replace H2 with JPA
+
+
+
+
+---
+
 
 ## Want to show
 
