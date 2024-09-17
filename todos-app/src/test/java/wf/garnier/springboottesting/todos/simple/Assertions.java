@@ -1,17 +1,39 @@
 package wf.garnier.springboottesting.todos.simple;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.assertj.core.api.AbstractObjectAssert;
+import org.assertj.core.api.FactoryBasedNavigableListAssert;
 
+import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.http.HttpStatus;
-import static org.assertj.core.api.Assertions.assertThat;
 
-class Assertions {
+/**
+ * Single entrypoint for all assertThat calls.
+ *
+ * @see <a href=
+ * "https://joel-costigliola.github.io/assertj/assertj-core-custom-assertions.html#single-assertion-entry-point">assertJ
+ * documentation</a>
+ */
+public class Assertions extends org.assertj.core.api.Assertions {
 
-	static class LoggingAssert extends AbstractObjectAssert<LoggingAssert, String> {
+	public static LoggingListAssert assertThat(CapturedOutput output) {
+		return LoggingListAssert.assertThat(output);
+	}
 
-		private static final Pattern pattern = Pattern.compile(
+	public static LoggingAssert assertThatLog(String logLine) {
+		return new LoggingAssert(logLine);
+	}
+
+	/**
+	 * Assert on a log line, to make sure it has the correct IP, requested page, and
+	 * response status.
+	 */
+	static public class LoggingAssert extends AbstractObjectAssert<LoggingAssert, String> {
+
+		static final Pattern pattern = Pattern.compile(
 				"user with IP \\[(?<ip>[\\d.]+)] requested \\[(?<request>[\\w/.?#]+)]. We responded with \\[(?<status>\\d{3})]");
 
 		private final String ip;
@@ -49,6 +71,24 @@ class Assertions {
 				.asInt()
 				.isEqualTo(status.value());
 			return myself;
+		}
+
+	}
+
+	/**
+	 * Utility class to have assertions on a list of
+	 */
+	static public class LoggingListAssert
+			extends FactoryBasedNavigableListAssert<LoggingListAssert, List<String>, String, LoggingAssert> {
+
+		public LoggingListAssert(List<String> maps) {
+			super(maps, LoggingListAssert.class, LoggingAssert::new);
+		}
+
+		static LoggingListAssert assertThat(CapturedOutput output) {
+			var lines = output.getAll().split("\\n");
+			var filtered = Arrays.stream(lines).filter(l -> LoggingAssert.pattern.matcher(l).find()).toList();
+			return new LoggingListAssert(filtered);
 		}
 
 	}

@@ -5,7 +5,8 @@ import java.util.List;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static wf.garnier.springboottesting.todos.simple.Assertions.assertThat;
+import static wf.garnier.springboottesting.todos.simple.Assertions.assertThatLog;
 
 class ToolsTests {
 
@@ -33,9 +34,10 @@ class ToolsTests {
 
 		@Test
 		void assertions() {
-			new Assertions.LoggingAssert("🕵️ user with IP [127.0.0.1] requested [/todo.js]. We responded with [200].")
-					.hasIp("127.0.0.1");
+			assertThatLog("🕵️ user with IP [127.0.0.1] requested [/todo.js]. We responded with [200].")
+				.hasIp("127.0.0.1");
 		}
+
 	}
 
 }

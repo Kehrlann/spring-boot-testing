@@ -15,7 +15,9 @@ import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
-import static org.assertj.core.api.Assertions.*;
+import org.springframework.http.HttpStatus;
+import static wf.garnier.springboottesting.todos.simple.Assertions.assertThat;
+import static wf.garnier.springboottesting.todos.simple.Assertions.assertThatLog;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import(ContainersConfiguration.class)
@@ -37,7 +39,13 @@ class TodoApplicationWithTomcatTests {
 	@Test
 	void logsIp(CapturedOutput output) throws IOException {
 		webClient.getPage(baseUrl);
-		assertThat(output.getOut()).contains("user with IP [127.0.0.1] requested [/]. We responded with [200]");
+		//@formatter:off
+		assertThat(output)
+				.hasSize(2)
+				.allSatisfy(logLine -> assertThatLog(logLine).hasIp("127.0.0.1").hasStatus(HttpStatus.OK))
+				.first()
+				.hasIp("127.0.0.1");
+		//@formatter:on;
 	}
 
 	@Test
