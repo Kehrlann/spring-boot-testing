@@ -31,7 +31,7 @@ import org.springframework.boot.context.properties.bind.ConstructorBinding;
  * </pre>
  */
 @ConfigurationProperties(prefix = "todo")
-class ExampleConfiguration {
+class TodoProperties {
 
 	@Valid
 	@UniqueByProperty(property = "name")
@@ -41,7 +41,7 @@ class ExampleConfiguration {
 	private final String search;
 
 	@ConstructorBinding
-	ExampleConfiguration(List<UserProfile> profiles, String search) {
+	TodoProperties(List<UserProfile> profiles, String search) {
 		this.profiles = profiles;
 		this.search = search;
 	}
