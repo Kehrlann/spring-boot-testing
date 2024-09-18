@@ -54,7 +54,7 @@ public @interface OneOf {
 	@interface Exactly {
 
 		String message() default "Exactly one of the following properties should be set: {annotatedOneOfFields}. "
-                                 + "Found {nonNullOneOfFieldsCount} properties set: {nonNullOneOfFields}.";
+				+ "Found {nonNullOneOfFieldsCount} properties set: {nonNullOneOfFields}.";
 
 		Class<?>[] groups() default {};
 
@@ -98,7 +98,7 @@ public @interface OneOf {
 	@interface AtMostOne {
 
 		String message() default "At most one of the following properties should be set: {annotatedOneOfFields}. "
-                                 + "Found {nonNullAtMostOneOfFieldsCount} properties set: {nonNullAtMostOneOfFields}.";
+				+ "Found {nonNullAtMostOneOfFieldsCount} properties set: {nonNullAtMostOneOfFields}.";
 
 		Class<?>[] groups() default {};
 
