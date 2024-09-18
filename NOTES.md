@@ -11,34 +11,30 @@ Anti-goals:
 
 - Specifics for testing a given project
 
-
 ## General flow
 
 Start with a simple TODOs app.
-
 
 ### `@SpringBootTest` out of the box
 
 For API testing:
 
 - `MockMvc`
-  - `.get(...)`
-  - `.post(...).param(..., ...)`
+    - `.get(...)`
+    - `.post(...).param(..., ...)`
 
 For web-based testing:
 
 - `WebClient` from `org.htmlunit:htmlunit`:
-  - `.click()`
-  - It also supports Javascript ... but not all of Javascript.
-  - Use Selenium in that case.
-
+    - `.click()`
+    - It also supports Javascript ... but not all of Javascript.
+    - Use Selenium in that case.
 
 ### `@SpringBootTest` with Tomcat
 
 - Show logging valve
 - How it shows in the test
 - How to debug a running test ("breakpoint > suspend > thread")
-
 
 ### Test context caching
 
@@ -55,23 +51,25 @@ For web-based testing:
     - See the "search" filter
     - not the right database (h2 vs postgres)
 
-
 ### Take a break with tools
 
 - Awaitility
 - AssertJ
 - Custom assertionsCustom assertions
 
-
 ### Testcontainers
 
-- Replace H2 with JPA
-
-
+- Use a real DB
+  - Replace H2 with Postgres
+  - Add docker-compose
+  - Now todos persist, yay
+- Use testcontainers
+  - @ServiceConnection
+  - Discuss Singleton bean
+- And now our slice test works!
 
 
 ---
-
 
 ## Want to show
 
