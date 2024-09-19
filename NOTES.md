@@ -68,6 +68,10 @@ For web-based testing:
   - Discuss Singleton bean
 - And now our slice test works!
 
+### Testing custom configurations
+
+- 
+
 
 ---
 
@@ -103,6 +107,17 @@ For web-based testing:
 
 - JUnit extensions
 - Wiremock
+
+- A word on Mockito
+  - Mock
+  - Spy
+  - Partial mock
+  - Argument captor
+  - Void methods
+  - Answer
+  - Statics
+  - Constructor
+  - Deep stubs
 
 ## Explore this
 
