@@ -2,6 +2,7 @@ package wf.garnier.springboottesting.todos.simple;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -11,6 +12,7 @@ import wf.garnier.springboottesting.todos.simple.validation.UniqueByProperty;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.bind.ConstructorBinding;
+import org.springframework.validation.annotation.Validated;
 
 /**
  * Example configuration:
@@ -30,30 +32,33 @@ import org.springframework.boot.context.properties.bind.ConstructorBinding;
  *          id: kehrlann
  * </pre>
  */
+@Validated
 @ConfigurationProperties(prefix = "todo")
-class TodoProperties {
+public class TodoProperties {
 
 	@Valid
-	@UniqueByProperty(property = "name")
+	@UniqueByProperty(property = "name", getterMethod = "name")
 	private final List<UserProfile> profiles;
 
 	@RegEx
 	private final String search;
 
 	@ConstructorBinding
+	@JsonCreator
 	TodoProperties(List<UserProfile> profiles, String search) {
 		this.profiles = profiles;
 		this.search = search;
 	}
 
 	@OneOf.Exactly
-	record UserProfile(@NotBlank String name, @Valid @OneOf InternalUser internalUser, @Valid @OneOf Github github) {
+	public record UserProfile(@NotBlank String name, @Valid @OneOf InternalUser internalUser,
+			@Valid @OneOf Github github) {
 
-		record InternalUser(@NotBlank String email, @NotBlank String password, @NotBlank String firstName,
+		public record InternalUser(@NotBlank String email, @NotBlank String password, @NotBlank String firstName,
 				@NotBlank String lastName, @Nullable String phoneNumber) {
 		}
 
-		record Github(@NotBlank String id) {
+		public record Github(@NotBlank String id) {
 		}
 	}
 

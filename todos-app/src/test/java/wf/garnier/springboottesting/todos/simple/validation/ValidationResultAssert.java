@@ -17,7 +17,7 @@ public class ValidationResultAssert<T> extends CollectionAssert<ConstraintViolat
 	 * @param <T> -
 	 * @return -
 	 */
-	static <T> ValidationResultAssert<T> assertThat(Collection<ConstraintViolation<T>> validationResult) {
+	public static <T> ValidationResultAssert<T> assertThat(Collection<ConstraintViolation<T>> validationResult) {
 		return new ValidationResultAssert<>(validationResult);
 	}
 
