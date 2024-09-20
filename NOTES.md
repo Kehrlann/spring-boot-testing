@@ -102,6 +102,7 @@ For web-based testing:
 - SpringApplicationBuilder
 
 - Spring bean validation testing
+- Instancio (is this a "cool tool" ?)
 
 - Security testing
 
