@@ -12,26 +12,37 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
+import org.junit.jupiter.api.ClassOrderer;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestClassOrder;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBindException;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.env.YamlPropertySourceLoader;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.test.context.TestPropertySource;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 import static wf.garnier.springboottesting.todos.simple.validation.ValidationResultAssert.assertThat;
 
+@TestClassOrder(ClassOrderer.OrderAnnotation.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TodoPropertiesTests {
 
 	private final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
 	@Nested
+	@Order(1)
 	class ManualBeanBuilding {
 
 		@Test
@@ -98,6 +109,7 @@ class TodoPropertiesTests {
 	}
 
 	@Nested
+	@Order(2)
 	class Jackson {
 
 		ObjectMapper mapper = YAMLMapper.builder()
@@ -149,14 +161,39 @@ class TodoPropertiesTests {
 	}
 
 	@Nested
+	@Order(3)
 	class IntegrationTest {
 
 		@Test
-		void integration() throws IOException {
+		void validProperties() throws IOException {
 			var config = new ByteArrayResource("""
 					todo:
 					  profiles:
-					  - name: " "
+					  - name: xxx
+					    internal-user:
+					      email: git@garnier.wf
+					      password: some-password
+					      first-name: Daniel
+					      last-name: Garnier-Moiroux
+					""".getBytes(StandardCharsets.UTF_8));
+
+			List<PropertySource<?>> propertySources = new YamlPropertySourceLoader().load("env-from-inline-test",
+					config);
+			var env = new StandardEnvironment();
+			env.getPropertySources().addFirst(propertySources.get(0));
+
+			var app = new SpringApplicationBuilder(PropertiesLoader.class).web(WebApplicationType.NONE)
+				.environment(env);
+			assertThatNoException().isThrownBy(app::run);
+			// assertThatExceptionOfType(ConfigurationPropertiesBindException.class).isThrownBy(app::run);
+		}
+
+		@Test
+		void invalidProperties() throws IOException {
+			var config = new ByteArrayResource("""
+					todo:
+					  profiles:
+					  - name: "  "
 					    internal-user:
 					      email: git@garnier.wf
 					""".getBytes(StandardCharsets.UTF_8));
@@ -168,7 +205,6 @@ class TodoPropertiesTests {
 
 			var app = new SpringApplicationBuilder(PropertiesLoader.class).web(WebApplicationType.NONE)
 				.environment(env);
-
 			assertThatExceptionOfType(ConfigurationPropertiesBindException.class).isThrownBy(app::run);
 		}
 
@@ -176,6 +212,26 @@ class TodoPropertiesTests {
 		@EnableConfigurationProperties(TodoProperties.class)
 		static class PropertiesLoader {
 
+		}
+
+	}
+
+	@Nested
+	@SpringBootTest(classes = IntegrationTest.PropertiesLoader.class)
+	@TestPropertySource(properties = """
+			todo.profiles[0].name = internal
+			todo.profiles[0].internal-user:
+			todo.profiles[0].internal-user.email: git@garnier.wf
+			todo.profiles[0].internal-user.password: some-password
+			todo.profiles[0].internal-user.first-name: Daniel
+			todo.profiles[0].internal-user.last-name: Garnier-Moiroux
+			""")
+	@Order(4)
+	class SpringBoot {
+
+		@Test
+		void loads() {
+			// This is slower, ~600ms
 		}
 
 	}
