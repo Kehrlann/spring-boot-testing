@@ -1,11 +1,14 @@
 package wf.garnier.springboottesting.todos.simple;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import jakarta.validation.ConstraintViolation;
 import org.assertj.core.api.AbstractObjectAssert;
 import org.assertj.core.api.FactoryBasedNavigableListAssert;
+import wf.garnier.springboottesting.todos.simple.validation.ValidationResultAssert;
 
 import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.http.HttpStatus;
@@ -25,6 +28,10 @@ public class Assertions extends org.assertj.core.api.Assertions {
 
 	public static LoggingAssert assertThatLog(String logLine) {
 		return new LoggingAssert(logLine);
+	}
+
+	public static <T> ValidationResultAssert<T> assertThatValidation(Collection<ConstraintViolation<T>> violations) {
+		return ValidationResultAssert.assertThat(violations);
 	}
 
 	/**

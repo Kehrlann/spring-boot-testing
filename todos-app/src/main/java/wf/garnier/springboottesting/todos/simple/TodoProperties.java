@@ -45,9 +45,17 @@ public class TodoProperties {
 
 	@ConstructorBinding
 	@JsonCreator
-    public TodoProperties(List<UserProfile> profiles, String search) {
+	public TodoProperties(List<UserProfile> profiles, String search) {
 		this.profiles = profiles;
 		this.search = search;
+	}
+
+	public @Valid List<UserProfile> getProfiles() {
+		return profiles;
+	}
+
+	public String getSearch() {
+		return search;
 	}
 
 	@OneOf.Exactly

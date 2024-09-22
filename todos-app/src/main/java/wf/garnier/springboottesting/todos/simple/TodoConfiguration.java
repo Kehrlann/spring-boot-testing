@@ -15,7 +15,7 @@ class TodoConfiguration {
 
 	Logger logger = LoggerFactory.getLogger(TodoConfiguration.class);
 
-	record SlowStartingBean() {
+	public record SlowStartingBean() {
 	}
 
 	// @Bean

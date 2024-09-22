@@ -2,6 +2,8 @@ package wf.garnier.springboottesting.todos.simple;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonParser;
@@ -12,6 +14,8 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.ClassOrderer;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Nested;
@@ -19,7 +23,9 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestClassOrder;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBindException;
@@ -31,9 +37,11 @@ import org.springframework.core.env.PropertySource;
 import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
-import static wf.garnier.springboottesting.todos.simple.validation.ValidationResultAssert.assertThat;
+import static wf.garnier.springboottesting.todos.simple.Assertions.assertThat;
+import static wf.garnier.springboottesting.todos.simple.Assertions.assertThatValidation;
 
 @TestClassOrder(ClassOrderer.OrderAnnotation.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -48,7 +56,7 @@ class TodoPropertiesTests {
 		@Test
 		public void empty() {
 			var empty = new TodoProperties(List.of(), null);
-			assertThat(validator.validate(empty)).isEmpty();
+			assertThatValidation(validator.validate(empty)).isEmpty();
 		}
 
 		@Test
@@ -72,7 +80,7 @@ class TodoPropertiesTests {
 			//@formatter:on
 
 			// Need the full Spring mechanisms
-			assertThat(validator.validate(complex)).hasSize(2)
+			assertThatValidation(validator.validate(complex)).hasSize(2)
 				.hasViolationForProperty("profiles[0].internalUser.email")
 				.hasViolationForProperties("profiles[0].internalUser.password");
 		}
@@ -102,7 +110,7 @@ class TodoPropertiesTests {
 					),
 					null);
 			//@formatter:on
-			assertThat(validator.validate(complex)).hasViolationForProperty("profiles",
+			assertThatValidation(validator.validate(complex)).hasViolationForProperty("profiles",
 					"List items should have distinct \"name\" properties. Found duplicates: [internal].");
 		}
 
@@ -123,7 +131,7 @@ class TodoPropertiesTests {
 			var empty = mapper.readValue("""
 					profiles: []
 					""", TodoProperties.class);
-			assertThat(validator.validate(empty)).isEmpty();
+			assertThatValidation(validator.validate(empty)).isEmpty();
 		}
 
 		@Test
@@ -135,8 +143,8 @@ class TodoPropertiesTests {
 					    email: git@garnier.wf
 					""", TodoProperties.class);
 			//@formatter:on
-			assertThat(validator.validate(props)).hasViolationForProperties("profiles[0].internalUser.firstName",
-					"profiles[0].internalUser.lastName");
+			assertThatValidation(validator.validate(props))
+				.hasViolationForProperties("profiles[0].internalUser.firstName", "profiles[0].internalUser.lastName");
 		}
 
 		@Test
@@ -154,7 +162,7 @@ class TodoPropertiesTests {
 					    id: kerhlann
 					""", TodoProperties.class);
 			//@formatter:on
-			assertThat(validator.validate(props)).hasViolationForProperty("profiles",
+			assertThatValidation(validator.validate(props)).hasViolationForProperty("profiles",
 					"List items should have distinct \"name\" properties. Found duplicates: [internal].");
 		}
 
@@ -163,6 +171,18 @@ class TodoPropertiesTests {
 	@Nested
 	@Order(3)
 	class IntegrationTest {
+
+		static Instant start;
+
+		@BeforeAll
+		static void beforeAll() {
+			start = Instant.now();
+		}
+
+		@AfterAll
+		static void afterAll() {
+			System.out.printf("~~~~~~~~~> done in %sms%n", Duration.between(start, Instant.now()).toMillis());
+		}
 
 		@Test
 		void validProperties() throws IOException {
@@ -220,7 +240,6 @@ class TodoPropertiesTests {
 	@SpringBootTest(classes = IntegrationTest.PropertiesLoader.class)
 	@TestPropertySource(properties = """
 			todo.profiles[0].name = internal
-			todo.profiles[0].internal-user:
 			todo.profiles[0].internal-user.email: git@garnier.wf
 			todo.profiles[0].internal-user.password: some-password
 			todo.profiles[0].internal-user.first-name: Daniel
@@ -229,9 +248,66 @@ class TodoPropertiesTests {
 	@Order(4)
 	class SpringBoot {
 
+		@Autowired
+		TodoProperties properties;
+
+		static Instant start;
+
+		@BeforeAll
+		static void beforeAll() {
+			start = Instant.now();
+		}
+
+		@AfterAll
+		static void afterAll() {
+			System.out.printf("~~~~~~~~~> @SpringBootTest done in %sms%n",
+					Duration.between(start, Instant.now()).toMillis());
+		}
+
 		@Test
 		void loads() {
+			assertThat(properties.getProfiles().get(0).internalUser().email()).isEqualTo("git@garnier.wf");
 			// This is slower, ~600ms
+		}
+
+	}
+
+	@Nested
+	@ExtendWith(SpringExtension.class)
+	@TestPropertySource(properties = """
+			todo.profiles[0].name = internal
+			todo.profiles[0].internal-user.email: git@garnier.wf
+			todo.profiles[0].internal-user.password: some-password
+			todo.profiles[0].internal-user.first-name: Daniel
+			todo.profiles[0].internal-user.last-name: Garnier-Moiroux
+			""")
+	@Order(5)
+	class SpringExtensionTests {
+
+		@Autowired
+		TodoProperties properties;
+
+		static Instant start;
+
+		@BeforeAll
+		static void beforeAll() {
+			start = Instant.now();
+		}
+
+		@AfterAll
+		static void afterAll() {
+			System.out.printf("~~~~~~~~~> done in %sms%n", Duration.between(start, Instant.now()).toMillis());
+		}
+
+		@Test
+		void loads() {
+			assertThat(properties.getProfiles().get(0).internalUser().email()).isEqualTo("git@garnier.wf");
+		}
+
+		@Configuration
+		@EnableConfigurationProperties(TodoProperties.class)
+		static class PropertiesLoader {
+
 		}
 
 	}

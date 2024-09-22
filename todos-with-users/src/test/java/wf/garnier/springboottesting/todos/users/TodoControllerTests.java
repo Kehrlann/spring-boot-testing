@@ -26,7 +26,7 @@ class TodoControllerTests {
 
 	@MockitoBean
 	private TodoService todoService;
-	
+
 	@Nested
 	class MockMvcTests {
 
