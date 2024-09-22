@@ -18,7 +18,7 @@ hideInToc: true
 
 ### Daniel Garnier-Moiroux
 
-Paris Spring Meetup @ Arolla, 2024-06-05
+Devoxx Belgium, 2024-10-07
 
 
 ---
@@ -48,10 +48,75 @@ Software Engineer @ Broadcom
 
 1. 🕸️ `@SpringBootTest` and web testing
 1. 🍕 Slice tests: slimmer ApplicationContext
+1. 🧰 Testing toolbox!
 1. 📦 Testcontainers
-1. 🧰 Testing toolbox: everything you need
-1. 🔐 *Maybe* Security testing: utility methods
-1. 🥸 *Maybe* A word on mocking
+1. ⚙️ Testing `@ConfigurationProperties`
+1. 🧰 Testing toolbox!
+1. 🔐 Security testing: utility methods
+
+---
+
+# 🕸️ `@SpringBootTest` web testing
+
+<br>
+
+- `WebEnvironment.MOCK` "mock" servlet environment
+  - Good for most use-cases
+
+<br>
+
+- `WebEnvironment.RANDOM_PORT` full webserver (e.g. Tomcat)
+  - Good for deep testing (e.g. session persistence)
+  - Useful for debugging
+  - `@LocalServerPort`, `WebTestClient` or `TestRestTemplate`
+
+---
+
+# 🕸️ `@SpringBootTest` web testing
+
+<br>
+
+- `MockMvc` for request-based testing (only in `MOCK` mode)
+- HtmlUnit's `WebClient` for (light) browser-based testing
+- Selenium for driving a real browser
+- Proper integration testing with JS tools (Playwright, Cypress)
+
+---
+
+# Spring Boot Testing
+
+1. 🕸️ `@SpringBootTest` and web testing
+1. 🍕 Slice tests: slimmer ApplicationContext
+1. 🧰 Testing toolbox!
+1. 📦 Testcontainers
+1. ⚙️ Testing `@ConfigurationProperties`
+1. 🧰 Testing toolbox!
+1. 🔐 Security testing: utility methods
+
+---
+
+# 🍕 Slice tests
+
+<br>
+
+- `@SpringBootTest` are slow (~ second)
+- Avoid `@ActiveProfiles`, `@MockitoBean`, `@DirtiesContext` ...
+- Reuse the cached context to avoid paying app startup price every time
+
+---
+
+# 🍕 Slice tests
+
+<br>
+
+- `@SpringBootTest(classes="...")`
+- Nested `@Configuration`
+- `@TestConfiguration` (imported or nested)
+- Test slices:
+    - `@WebMvcTest`, `@DataJpaTest`
+- Custom slicing
+
+
 
 ---
 
