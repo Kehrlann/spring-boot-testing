@@ -26,16 +26,10 @@ dependencies {
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
-    developmentOnly("org.springframework.boot:spring-boot-docker-compose")
-
-    runtimeOnly("org.postgresql:postgresql")
-
-    testImplementation("org.springframework.boot:spring-boot-testcontainers")
+    runtimeOnly("com.h2database:h2")
 
     testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
     testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
-    testImplementation("org.testcontainers:testcontainers-junit-jupiter")
-    testImplementation("org.testcontainers:testcontainers-postgresql")
     testImplementation("org.htmlunit:htmlunit")
 }
 
