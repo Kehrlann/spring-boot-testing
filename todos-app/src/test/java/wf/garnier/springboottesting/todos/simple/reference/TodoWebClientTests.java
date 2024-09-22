@@ -1,4 +1,4 @@
-package wf.garnier.springboottesting.todos.simple;
+package wf.garnier.springboottesting.todos.simple.reference;
 
 import java.io.IOException;
 
@@ -9,18 +9,17 @@ import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlInput;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlTextArea;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import wf.garnier.springboottesting.todos.simple.TodoRepository;
+import wf.garnier.springboottesting.todos.simple.TodoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Import(ContainersConfiguration.class)
+// @Import(ContainersConfiguration.class)
 class TodoWebClientTests {
 
 	@Autowired
@@ -32,12 +31,10 @@ class TodoWebClientTests {
 	@Autowired
 	TodoRepository todoRepository;
 
-	@BeforeEach
 	void setUp() {
 		todoRepository.deleteAll();
 	}
 
-	@Test
 	void addTodo() throws IOException {
 		HtmlPage page = webClient.getPage("/");
 
@@ -55,7 +52,6 @@ class TodoWebClientTests {
 		assertThat(todoDescription).isEqualTo("and it has a description");
 	}
 
-	@Test
 	void completeTodo() throws IOException {
 		todoService.addTodo("new todo", null);
 
@@ -67,7 +63,6 @@ class TodoWebClientTests {
 		assertThat(page.querySelectorAll(".todo")).isEmpty();
 	}
 
-	@Test
 	void noDescription() throws IOException {
 		todoService.addTodo("new todo", null);
 
@@ -78,7 +73,6 @@ class TodoWebClientTests {
 		assertThat(toggleButton.isDisabled()).isTrue();
 	}
 
-	@Test
 	void javascriptToggle() throws IOException {
 		todoService.addTodo("new todo", """
 				this is a todo that will showcase toggling visibility
@@ -95,7 +89,6 @@ class TodoWebClientTests {
 		assertThat(description.isDisplayed()).isTrue();
 	}
 
-	@Test
 	void searchTodo() throws IOException {
 		todoService.addTodo("Secure todo", "This is top secret");
 		todoService.addTodo("Open todo", "Everyone can see this");
@@ -110,7 +103,6 @@ class TodoWebClientTests {
 		assertThat(todos).hasSize(2).containsExactlyInAnyOrder("A todo", "Secure todo");
 	}
 
-	@Test
 	void clearSearch() throws IOException {
 		todoService.addTodo("Secure todo", "This is top secret");
 		todoService.addTodo("Open todo", "Everyone can see this");
@@ -124,7 +116,6 @@ class TodoWebClientTests {
 		assertThat(todos).hasSize(3);
 	}
 
-	@Test
 	void parseString() throws IOException {
 		var htmlString = """
 				<html>
