@@ -7,7 +7,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
-class TodoService {
+public class TodoService {
 
 	private final TodoRepository todoRepository;
 

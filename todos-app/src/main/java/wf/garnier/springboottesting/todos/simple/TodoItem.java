@@ -8,7 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-final class TodoItem {
+public final class TodoItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

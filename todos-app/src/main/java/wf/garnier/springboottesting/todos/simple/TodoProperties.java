@@ -45,7 +45,7 @@ public class TodoProperties {
 
 	@ConstructorBinding
 	@JsonCreator
-	TodoProperties(List<UserProfile> profiles, String search) {
+    public TodoProperties(List<UserProfile> profiles, String search) {
 		this.profiles = profiles;
 		this.search = search;
 	}
