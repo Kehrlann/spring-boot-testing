@@ -1,16 +1,16 @@
-package wf.garnier.springboottesting.todos.simple;
+package wf.garnier.springboottesting.todos.simple.reference;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import wf.garnier.springboottesting.todos.simple.TodoItem;
+import wf.garnier.springboottesting.todos.simple.TodoRepository;
+import wf.garnier.springboottesting.todos.simple.TodoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
-import org.springframework.context.annotation.Import;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-@Import(ContainersConfiguration.class)
+//@Import(ContainersConfiguration.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class TodoRepositoryTest {
 
@@ -19,7 +19,6 @@ class TodoRepositoryTest {
 
 	TodoService todoService;
 
-	@BeforeEach
 	void setUp() {
 		todoService = new TodoService(todoRepository);
 		todoService.addTodo("Talk about Spring Security", """
@@ -33,7 +32,6 @@ class TodoRepositoryTest {
 				""");
 	}
 
-	@Test
 	void fullTextSearch() {
 		var todos = todoService.searchByKeyword("secure");
 

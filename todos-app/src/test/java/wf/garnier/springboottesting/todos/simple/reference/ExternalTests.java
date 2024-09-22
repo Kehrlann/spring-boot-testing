@@ -1,19 +1,14 @@
-package wf.garnier.springboottesting.todos.simple;
+package wf.garnier.springboottesting.todos.simple.reference;
 
-
-import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.web.client.RestClient;
-import static wf.garnier.springboottesting.todos.simple.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@Import(ContainersConfigurationSingleton.class)
 class ExternalTests {
 
-    @Test
     void connectToExternalService(@Value("${external.service.url:}") String externalServiceUrl) {
         assertThat(externalServiceUrl).isNotBlank();
 
