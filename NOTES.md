@@ -53,9 +53,10 @@ For web-based testing:
 
 ### Take a break with tools
 
-- Awaitility
 - AssertJ
-- Custom assertionsCustom assertions
+- AssertJ with mockMvc
+- Custom assertions
+- Awaitility
 
 ### Testcontainers
 
@@ -125,4 +126,6 @@ For web-based testing:
 - Reactive tests
 - Custom slice test: custom mockmvc
 - Spring Batch tests
+- MockRestServiceServer
+- Parallel testing
 - Testcontainers lifecycle with JUnit 5.1
