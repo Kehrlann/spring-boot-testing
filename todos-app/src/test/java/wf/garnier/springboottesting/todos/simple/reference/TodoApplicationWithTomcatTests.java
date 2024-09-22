@@ -1,35 +1,25 @@
-package wf.garnier.springboottesting.todos.simple;
-
-import java.io.IOException;
+package wf.garnier.springboottesting.todos.simple.reference;
 
 import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlButton;
 import org.htmlunit.html.HtmlInput;
 import org.htmlunit.html.HtmlPage;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.system.CapturedOutput;
-import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.client.RestTestClient;
 import org.springframework.test.web.servlet.client.assertj.RestTestClientResponse;
-import static wf.garnier.springboottesting.todos.simple.Assertions.assertThat;
-import static wf.garnier.springboottesting.todos.simple.Assertions.assertThatLog;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Import(ContainersConfiguration.class)
-@ExtendWith(OutputCaptureExtension.class)
-@AutoConfigureRestTestClient
-@Tag("integ")
+import java.io.IOException;
+
+import static wf.garnier.springboottesting.todos.simple.reference.Assertions.assertThat;
+import static wf.garnier.springboottesting.todos.simple.reference.Assertions.assertThatLog;
+
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+//@Import(ContainersConfiguration.class)
+//@ExtendWith(OutputCaptureExtension.class)
+//@AutoConfigureRestTestClient
 class TodoApplicationWithTomcatTests {
 
 	@LocalServerPort
@@ -37,17 +27,14 @@ class TodoApplicationWithTomcatTests {
 
 	WebClient webClient = new WebClient();
 
-	@Autowired
 	RestTestClient restClient;
 
 	private String baseUrl;
 
-	@BeforeEach
 	void setUp() {
 		baseUrl = "http://localhost:%s/".formatted(port);
 	}
 
-	@Test
 	void logsIp(CapturedOutput output) throws IOException {
 		webClient.getPage(baseUrl);
 		//@formatter:off
@@ -59,7 +46,6 @@ class TodoApplicationWithTomcatTests {
 		//@formatter:on;
 	}
 
-	@Test
 	void displaysPage() throws IOException {
 		HtmlPage page = webClient.getPage(baseUrl);
 
@@ -73,7 +59,6 @@ class TodoApplicationWithTomcatTests {
 		assertThat(addedToto).isEqualTo("this is a todo");
 	}
 
-	@Test
 	void restClient() {
 		var response = restClient.get().exchange();
 		var resp = RestTestClientResponse.from(response);
@@ -81,7 +66,6 @@ class TodoApplicationWithTomcatTests {
 		assertThat(resp).bodyText().contains("<h1>TODO</h1>");
 	}
 
-	@Test
 	void notFound() {
 		var rawResponse = restClient.get().uri("/does-not-exist").accept(MediaType.TEXT_HTML).exchange();
 

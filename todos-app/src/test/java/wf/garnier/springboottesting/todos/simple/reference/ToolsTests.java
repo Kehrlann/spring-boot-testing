@@ -1,4 +1,4 @@
-package wf.garnier.springboottesting.todos.simple;
+package wf.garnier.springboottesting.todos.simple.reference;
 
 import java.time.Duration;
 import java.util.List;
@@ -10,13 +10,12 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static wf.garnier.springboottesting.todos.simple.Assertions.assertThat;
-import static wf.garnier.springboottesting.todos.simple.Assertions.assertThatLog;
+import static wf.garnier.springboottesting.todos.simple.reference.Assertions.assertThat;
+import static wf.garnier.springboottesting.todos.simple.reference.Assertions.assertThatLog;
 
 @Tag("unit")
 class ToolsTests {
 
-	@Nested
 	class AssertJ {
 
 		record Book(String title, String author, String country, int publicationYear) {
@@ -29,7 +28,6 @@ class ToolsTests {
 				new Book("The Stone Skies", "N.K. Jemisin", "USA", 2017),
 				new Book("The calculating stars", "Mary Robinette Kowal", "USA", 20218));
 
-		@Test
 		void example() {
 			assertThat(books).hasSize(5)
 				.filteredOn(book -> book.publicationYear > 2016)
@@ -38,7 +36,6 @@ class ToolsTests {
 				.containsExactlyInAnyOrder("The calculating stars", "The Stone Skies");
 		}
 
-		@Test
 		void awaitility() {
 			var dice = new Dice(20);
 			var count = new AtomicInteger(1);
@@ -55,7 +52,6 @@ class ToolsTests {
 			//@formatter:on;
 		}
 
-		@Test
 		void assertions() {
 			assertThatLog("🕵️ user with IP [127.0.0.1] requested [/todo.js]. We responded with [200].")
 				.hasIp("127.0.0.1");

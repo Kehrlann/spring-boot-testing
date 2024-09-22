@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableConfigurationProperties(TodoProperties.class)
 @ConditionalOnProperty(value = "todo.profiles[0].name", matchIfMissing = false)
-class TodoPropertiesConfiguration {
+public class TodoPropertiesConfiguration {
 
 	Logger logger = LoggerFactory.getLogger(getClass());
 

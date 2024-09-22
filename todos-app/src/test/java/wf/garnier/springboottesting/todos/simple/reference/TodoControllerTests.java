@@ -1,18 +1,14 @@
-package wf.garnier.springboottesting.todos.simple;
+package wf.garnier.springboottesting.todos.simple.reference;
 
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import wf.garnier.springboottesting.todos.simple.TodoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest
-@Tag("slice")
 class TodoControllerTests {
 
 	@Autowired
@@ -21,7 +17,6 @@ class TodoControllerTests {
 	@MockitoBean
 	TodoService todoService;
 
-	@Test
 	void deleteTodo() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.post("/todo/25/delete"))
 			.andExpect(status().is3xxRedirection())
@@ -30,7 +25,6 @@ class TodoControllerTests {
 		verify(todoService).delete(25);
 	}
 
-	@Test
 	void addTodo() throws Exception {
 		mockMvc
 			.perform(MockMvcRequestBuilders.post("/todo")
