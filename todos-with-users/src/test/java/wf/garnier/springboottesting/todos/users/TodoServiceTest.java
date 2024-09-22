@@ -11,15 +11,11 @@ import org.springframework.context.annotation.Import;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-@Import(TestTodoUsersApplication.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class TodoServiceTest {
 
 	@Autowired
 	TodoRepository todoRepository;
-
-	@Autowired
-	EntityManager entityManager;
 
 	private TodoService todoService;
 

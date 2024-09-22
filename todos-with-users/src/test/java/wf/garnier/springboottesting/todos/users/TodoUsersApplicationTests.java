@@ -21,7 +21,6 @@ import org.springframework.context.annotation.Import;
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
-@Import(TestTodoUsersApplication.class)
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TodoUsersApplicationTests {
