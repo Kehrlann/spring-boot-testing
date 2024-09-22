@@ -1,13 +1,12 @@
-package wf.garnier.springboottesting.todos.simple;
+package wf.garnier.springboottesting.todos.simple.reference;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import wf.garnier.springboottesting.todos.simple.TodoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.assertj.MockMvcTester;
@@ -17,12 +16,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
-import static wf.garnier.springboottesting.todos.simple.Assertions.assertThat;
+import static wf.garnier.springboottesting.todos.simple.reference.Assertions.assertThat;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureRestTestClient
-@Import(ContainersConfiguration.class)
+//@Import(ContainersConfiguration.class)
 class TodoMockMvcTests {
 
 	@Autowired
@@ -36,7 +35,6 @@ class TodoMockMvcTests {
 		todoRepository.deleteAll();
 	}
 
-	@Test
 	void displaysTodo() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.post("/todo").param("text", "this is a todo"))
 			.andExpect(status().is3xxRedirection());
@@ -48,7 +46,6 @@ class TodoMockMvcTests {
 	@Autowired
 	RestTestClient client;
 
-	@Test
 	void restClient() {
 		var response = client.get().uri("/").exchange();
 
@@ -61,7 +58,6 @@ class TodoMockMvcTests {
 	@Autowired
 	private MockMvcTester tester;
 
-	@Test
 	void assertJ() {
 		var resp = tester
 			.perform(post("/todo").param("text", "hello devoxx").param("description", "it's good to be with you!"));

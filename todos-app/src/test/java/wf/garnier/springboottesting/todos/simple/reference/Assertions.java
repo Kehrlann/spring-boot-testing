@@ -1,4 +1,4 @@
-package wf.garnier.springboottesting.todos.simple;
+package wf.garnier.springboottesting.todos.simple.reference;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,7 +20,7 @@ import org.springframework.http.HttpStatus;
  * "https://joel-costigliola.github.io/assertj/assertj-core-custom-assertions.html#single-assertion-entry-point">assertJ
  * documentation</a>
  */
-public class Assertions extends org.assertj.core.api.Assertions {
+class Assertions extends org.assertj.core.api.Assertions {
 
 	public static LoggingListAssert assertThat(CapturedOutput output) {
 		return LoggingListAssert.assertThat(output);
