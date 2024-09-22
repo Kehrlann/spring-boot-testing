@@ -2,9 +2,6 @@ spring:
   sql:
     init:
       mode: always
-  docker:
-    compose:
-      file: classpath:/compose.yaml
   thymeleaf:
     cache: false
 #logging:
