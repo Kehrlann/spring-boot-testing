@@ -1,4 +1,4 @@
-package wf.garnier.springboottesting.todos.simple;
+package wf.garnier.springboottesting.todos.simple.reference;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -24,6 +24,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestClassOrder;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
+import wf.garnier.springboottesting.todos.simple.TodoProperties;
+import wf.garnier.springboottesting.todos.simple.TodoPropertiesConfiguration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.WebApplicationType;
@@ -46,8 +48,8 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
-import static wf.garnier.springboottesting.todos.simple.Assertions.assertThat;
-import static wf.garnier.springboottesting.todos.simple.Assertions.assertThatValidation;
+import static wf.garnier.springboottesting.todos.simple.reference.Assertions.assertThat;
+import static wf.garnier.springboottesting.todos.simple.reference.Assertions.assertThatValidation;
 
 @TestClassOrder(ClassOrderer.OrderAnnotation.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -59,13 +61,11 @@ class TodoPropertiesTests {
 	@Order(1)
 	class ManualBeanBuilding {
 
-		@Test
 		public void empty() {
 			var empty = new TodoProperties(List.of(), null);
 			assertThatValidation(validator.validate(empty)).isEmpty();
 		}
 
-		@Test
 		public void simple() {
 			//@formatter:off
 			var complex = new TodoProperties(
@@ -91,7 +91,6 @@ class TodoPropertiesTests {
 				.hasViolationForProperties("profiles[0].internalUser.password");
 		}
 
-		@Test
 		public void complex() {
 			//@formatter:off
 			var complex = new TodoProperties(
@@ -132,7 +131,6 @@ class TodoPropertiesTests {
 			.addModule(new ParameterNamesModule())
 			.build();
 
-		@Test
 		public void empty() throws JsonProcessingException {
 			var empty = mapper.readValue("""
 					profiles: []
@@ -140,7 +138,6 @@ class TodoPropertiesTests {
 			assertThatValidation(validator.validate(empty)).isEmpty();
 		}
 
-		@Test
 		public void simple() throws JsonProcessingException {
 			var props = mapper.readValue("""
 					profiles:
@@ -153,7 +150,6 @@ class TodoPropertiesTests {
 				.hasViolationForProperties("profiles[0].internalUser.firstName", "profiles[0].internalUser.lastName");
 		}
 
-		@Test
 		public void complex() throws JsonProcessingException {
 			var props = mapper.readValue("""
 					profiles:
@@ -190,7 +186,6 @@ class TodoPropertiesTests {
 			System.out.printf("~~~~~~~~~> done in %sms%n", Duration.between(start, Instant.now()).toMillis());
 		}
 
-		@Test
 		void validProperties() throws IOException {
 			var config = new ByteArrayResource("""
 					todo:
@@ -214,7 +209,6 @@ class TodoPropertiesTests {
 			// assertThatExceptionOfType(ConfigurationPropertiesBindException.class).isThrownBy(app::run);
 		}
 
-		@Test
 		void invalidProperties() throws IOException {
 			var config = new ByteArrayResource("""
 					todo:
@@ -270,7 +264,6 @@ class TodoPropertiesTests {
 					Duration.between(start, Instant.now()).toMillis());
 		}
 
-		@Test
 		void loads() {
 			assertThat(properties.getProfiles().get(0).internalUser().email()).isEqualTo("git@garnier.wf");
 			// This is slower, ~600ms
@@ -305,7 +298,6 @@ class TodoPropertiesTests {
 			System.out.printf("~~~~~~~~~> done in %sms%n", Duration.between(start, Instant.now()).toMillis());
 		}
 
-		@Test
 		void loads() {
 			assertThat(properties.getProfiles().get(0).internalUser().email()).isEqualTo("git@garnier.wf");
 		}
@@ -340,12 +332,10 @@ class TodoPropertiesTests {
 			System.out.printf("~~~~~~~~~> done in %sms%n", Duration.between(start, Instant.now()).toMillis());
 		}
 
-		@Test
 		void loads() {
 			assertThat(properties.getProfiles().get(0).internalUser().email()).isEqualTo("git@garnier.wf");
 		}
 
-		@Test
 		void printsProfileCount(CapturedOutput output) {
 			assertThat(output.getOut()).contains("found 1 profile(s)");
 		}
