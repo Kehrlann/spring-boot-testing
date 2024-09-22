@@ -16,10 +16,3 @@ server:
       persistent: true
   port: 8080
   address: 127.0.0.1
-
-todo:
-  profiles:
-    - name: xx
-      internal-user:
-        email: a@b.com
-        first-name: " "
