@@ -44,6 +44,16 @@ Software Engineer @ Broadcom
 
 ---
 
+# Disclaimer
+
+<br>
+
+This talk is **NOT** about how to architect your tests.
+
+Search "Devoxx testing", sort by "most views" :)
+
+---
+
 # Spring Boot Testing
 
 1. 🕸️ `@SpringBootTest` and web testing
@@ -110,12 +120,11 @@ Software Engineer @ Broadcom
 <br>
 
 - `@SpringBootTest(classes="...")`
-- Nested `@Configuration`
+- Nested `@Configuration` and `@Import(...)`
 - `@TestConfiguration` (imported or nested)
 - Test slices:
     - `@WebMvcTest`, `@DataJpaTest`
 - Custom slicing
-
 
 
 ---
