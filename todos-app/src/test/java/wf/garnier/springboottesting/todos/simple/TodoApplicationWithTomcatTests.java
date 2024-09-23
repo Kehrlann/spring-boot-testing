@@ -10,12 +10,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.client.RestClient;
 import static wf.garnier.springboottesting.todos.simple.Assertions.assertThat;
 import static wf.garnier.springboottesting.todos.simple.Assertions.assertThatLog;
 
@@ -60,6 +63,19 @@ class TodoApplicationWithTomcatTests {
 
 		var addedToto = page.querySelector(".todo > [data-role=\"text\"]").getTextContent();
 		assertThat(addedToto).isEqualTo("this is a todo");
+	}
+
+	@Test
+	void restTemplate(@Autowired TestRestTemplate restTemplate) throws IOException {
+		var response = restTemplate.getForObject("/", String.class);
+
+		assertThat(response).contains("<h1>TODO</h1>");
+
+		var client = RestClient.builder(restTemplate.getRestTemplate()).baseUrl(restTemplate.getRootUri()).build();
+
+		var resp = client.get().uri("/").retrieve().body(String.class);
+		assertThat(resp).contains("<h1>TODO</h1>");
+
 	}
 
 }
