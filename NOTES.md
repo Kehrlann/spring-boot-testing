@@ -47,6 +47,7 @@ For web-based testing:
 ### Slices!
 
 - WebMvc slice
+- Manual configurationss
 - DataJPA Slice
     - See the "search" filter
     - not the right database (h2 vs postgres)
@@ -69,7 +70,7 @@ For web-based testing:
   - Discuss Singleton bean
 - And now our slice test works!
 
-### Testing custom configurations
+### Testing custom properties
 
 - 
 
