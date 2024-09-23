@@ -126,6 +126,17 @@ Search "Devoxx testing", sort by "most views" :)
     - `@WebMvcTest`, `@DataJpaTest`
 - Custom slicing
 
+---
+
+# Spring Boot Testing
+
+1. 🕸️ `@SpringBootTest` and web testing
+1. 🍕 Slice tests: slimmer ApplicationContext
+1. 🧰 Testing toolbox!
+1. 📦 Testcontainers
+1. ⚙️ Testing `@ConfigurationProperties`
+1. 🧰 Testing toolbox!
+1. 🔐 Security testing: utility methods
 
 ---
 
