@@ -31,7 +31,7 @@ class TodoController {
 	}
 
 	@PostMapping("/todo")
-	public String delete(@RequestParam("text") String text,
+	public String addTodo(@RequestParam("text") String text,
 			@RequestParam(value = "description", required = false) String description) {
 		todoService.addTodo(text, description);
 		return "redirect:/";
