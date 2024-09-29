@@ -44,6 +44,12 @@ For web-based testing:
 - Change the tests and make them slightly different (profile, properties, MockBean)
     - terribly slow with the cache misses
 
+### Take a break with tools
+
+- AssertJ
+- AssertJ with mockMvc
+- Custom assertions
+
 ### Slices!
 
 - WebMvc slice
@@ -51,13 +57,6 @@ For web-based testing:
 - DataJPA Slice
     - See the "search" filter
     - not the right database (h2 vs postgres)
-
-### Take a break with tools
-
-- AssertJ
-- AssertJ with mockMvc
-- Custom assertions
-- Awaitility
 
 ### Testcontainers
 
@@ -70,9 +69,17 @@ For web-based testing:
   - Discuss Singleton bean
 - And now our slice test works!
 
+
+### Taking another break with testing tools
+
+- Awaitility
+- Mockito
+- Instancio? Datafaker?
+
 ### Testing custom properties
 
 - 
+
 
 
 ---
