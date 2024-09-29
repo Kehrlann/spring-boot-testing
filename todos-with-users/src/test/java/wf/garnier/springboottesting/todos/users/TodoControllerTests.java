@@ -25,6 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
 
 @WebMvcTest
+@Import(SecurityConfiguration.class)
 class TodoControllerTests {
 
 	@MockitoBean
