@@ -2,9 +2,28 @@ spring:
   sql:
     init:
       mode: always
+
   docker:
     compose:
-      file: compose.yaml
+      file: classpath:/compose.yaml
+
+  security:
+    oauth2:
+      client:
+        registration:
+          dex:
+            client-name: Dex IDP
+            client-id: base-client
+            client-secret: base-secret
+            scope:
+              - openid
+              - email
+              - profile
+        provider:
+          dex:
+            issuer-uri: http://localhost:5556
+
+
 #logging:
 #  level:
 #    org.springframework.security: TRACE

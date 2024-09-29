@@ -6,9 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,6 +30,9 @@ class TodoControllerTests {
 	@MockitoBean
 	private TodoService todoService;
 
+	@MockitoBean
+	ClientRegistrationRepository clientRegistrationRepository;
+
 	@Nested
 	class MockMvcTests {
 
@@ -35,7 +41,9 @@ class TodoControllerTests {
 
 		@Test
 		void noUser() throws Exception {
-			mockMvc.perform(MockMvcRequestBuilders.get("/")).andExpect(status().is(401));
+			mockMvc.perform(MockMvcRequestBuilders.get("/"))
+				.andExpect(status().is(HttpStatus.FOUND.value()))
+				.andExpect(redirectedUrl("http://localhost/login"));
 		}
 
 		@Test

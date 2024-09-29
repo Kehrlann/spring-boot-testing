@@ -23,6 +23,7 @@ import static org.assertj.core.api.Assertions.*;
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Import(TestContainersConfiguration.class)
 class TodoUsersApplicationTests {
 
 	@Test
