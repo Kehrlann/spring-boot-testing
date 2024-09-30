@@ -56,7 +56,7 @@ Search "Devoxx testing", sort by "most views" :)
 
 # Spring Boot Testing
 
-1. 🕸️ `@SpringBootTest` and web testing
+1. **🕸️ `@SpringBootTest` and web testing**
 1. 🐌 `TestContext` caching
 1. 🧰 Testing toolbox!
 1. 🍕 Slice tests: slimmer ApplicationContext
@@ -97,7 +97,7 @@ Search "Devoxx testing", sort by "most views" :)
 # Spring Boot Testing
 
 1. 🕸️ `@SpringBootTest` and web testing
-1. 🐌 `TestContext` caching
+1. **🐌 `TestContext` caching**
 1. 🧰 Testing toolbox!
 1. 🍕 Slice tests: slimmer ApplicationContext
 1. 📦 Testcontainers
@@ -121,6 +121,8 @@ Search "Devoxx testing", sort by "most views" :)
 
 <br>
 
+**TODO** Keep? Remove?
+
 - `@SpringBootTest(classes="...")`
 - Nested `@Configuration` and `@Import(...)`
 - `@TestConfiguration` (imported or nested)
@@ -135,8 +137,9 @@ Search "Devoxx testing", sort by "most views" :)
 # Spring Boot Testing
 
 1. 🕸️ `@SpringBootTest` and web testing
+1. 🐌 `TestContext` caching
+1. **🧰 Testing toolbox!**
 1. 🍕 Slice tests: slimmer ApplicationContext
-1. 🧰 Testing toolbox!
 1. 📦 Testcontainers
 1. ⚙️ Testing `@ConfigurationProperties`
 1. 🧰 Testing toolbox!
@@ -144,15 +147,126 @@ Search "Devoxx testing", sort by "most views" :)
 
 ---
 
+# 🧰 Testing toolbox!
+
+<br>
+
+
+- `assertJ` fluent assertions
+- `MockMvcTester`: `MockMvc` with assertj (Boot >= 3.4)
+- `@OutputCaptureExtension`: capture all stdout/stderr outputs
+- Custom assertJ assertions 🤯️
+
+**You can:**
+
+- Ask an LLM
+- Read the docs _(wow so 2023)_
+
+---
+
 # Spring Boot Testing
 
 1. 🕸️ `@SpringBootTest` and web testing
-1. 🍕 Slice tests: slimmer ApplicationContext
+1. 🐌 `TestContext` caching
 1. 🧰 Testing toolbox!
+1. **🍕 Slice tests: slimmer ApplicationContext**
 1. 📦 Testcontainers
 1. ⚙️ Testing `@ConfigurationProperties`
 1. 🧰 Testing toolbox!
 1. 🔐 Security testing: utility methods
+
+---
+
+# 🍕 Slice tests: slimmer ApplicationContext
+
+<br>
+
+**TODO**
+
+---
+
+# Spring Boot Testing
+
+1. 🕸️ `@SpringBootTest` and web testing
+1. 🐌 `TestContext` caching
+1. 🧰 Testing toolbox!
+1. 🍕 Slice tests: slimmer ApplicationContext
+1. **📦 Testcontainers**
+1. 🧰 Testing toolbox!
+1. ⚙️ Testing `@ConfigurationProperties`
+1. 🔐 Security testing: utility methods
+
+---
+
+# 📦 Testcontainers
+
+<br>
+
+**TODO**
+
+---
+
+# Spring Boot Testing
+
+1. 🕸️ `@SpringBootTest` and web testing
+1. 🐌 `TestContext` caching
+1. 🧰 Testing toolbox!
+1. 🍕 Slice tests: slimmer ApplicationContext
+1. 📦 Testcontainers
+1. **🧰 Testing toolbox!**
+1. ⚙️ Testing `@ConfigurationProperties`
+1. 🔐 Security testing: utility methods
+
+---
+
+# 🧰 Testing toolbox!
+
+<br>
+
+**TODO**
+
+---
+
+# Spring Boot Testing
+
+1. 🕸️ `@SpringBootTest` and web testing
+1. 🐌 `TestContext` caching
+1. 🧰 Testing toolbox!
+1. 🍕 Slice tests: slimmer ApplicationContext
+1. 📦 Testcontainers
+1. 🧰 Testing toolbox!
+1. **⚙️ Testing `@ConfigurationProperties`**
+1. 🔐 Security testing: utility methods
+
+---
+
+# ⚙️ Testing `@ConfigurationProperties`
+
+<br>
+
+**TODO**
+
+---
+
+# Spring Boot Testing
+
+1. 🕸️ `@SpringBootTest` and web testing
+1. 🐌 `TestContext` caching
+1. 🧰 Testing toolbox!
+1. 🍕 Slice tests: slimmer ApplicationContext
+1. 📦 Testcontainers
+1. 🧰 Testing toolbox!
+1. ⚙️ Testing `@ConfigurationProperties`
+1. **🔐 Security testing: utility methods**
+
+---
+
+# 🔐 Security testing: utility methods
+
+<br>
+
+**TODO**
+
 
 ---
 
