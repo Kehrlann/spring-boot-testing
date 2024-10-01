@@ -41,6 +41,17 @@ Software Engineer @ Broadcom
 - <logos-github-icon /> github.com/Kehrlann/
 - <fluent-emoji-flat-envelope-with-arrow /> contact@garnier.wf
 
+---
+
+# Thanks ❤️
+
+<br>
+
+<img src="keleos.png" style="height: 200px; margin: auto;"/>
+
+<br>
+
+<em style="margin: auto; display: block; width: fit-content;">https://keleos.be</em>
 
 ---
 
@@ -51,6 +62,19 @@ Software Engineer @ Broadcom
 This talk is **NOT** about how to architect your tests.
 
 Search "Devoxx testing", sort by "most views" :)
+
+---
+
+# Spring Boot Testing
+
+1. 🕸️ `@SpringBootTest` and web testing
+1. 🐌 `TestContext` caching
+1. 🧰 Testing toolbox!
+1. 🍕 Slice tests: slimmer ApplicationContext
+1. 📦 Testcontainers
+1. ⚙️ Testing `@ConfigurationProperties`
+1. 🧰 Testing toolbox!
+1. 🔐 Security testing: utility methods
 
 ---
 
@@ -121,13 +145,7 @@ Search "Devoxx testing", sort by "most views" :)
 
 <br>
 
-**TODO** Keep? Remove?
-
-- `@SpringBootTest(classes="...")`
-- Nested `@Configuration` and `@Import(...)`
-- `@TestConfiguration` (imported or nested)
-
-**After the commercials:**
+**After the commercial break:**
 
 - Test slices:
     - `@WebMvcTest`, `@DataJpaTest`, ...
@@ -153,14 +171,24 @@ Search "Devoxx testing", sort by "most views" :)
 
 
 - `assertJ` fluent assertions
-- `MockMvcTester`: `MockMvc` with assertj (Boot >= 3.4)
+    - `MockMvcTester`: `MockMvc` with assertj (Boot >= 3.4)
+    - Custom assertJ assertions 🤯️
+
 - `@OutputCaptureExtension`: capture all stdout/stderr outputs
-- Custom assertJ assertions 🤯️
+
+---
+
+# 🧰 Testing toolbox!
+
+<br>
 
 **You can:**
 
 - Ask an LLM
-- Read the docs _(wow so 2023)_
+
+**_Maybe_ you should:**
+
+- Read the docs <small>_(wow such old very 2023)_</small>
 
 ---
 
@@ -181,7 +209,10 @@ Search "Devoxx testing", sort by "most views" :)
 
 <br>
 
-**TODO**
+- Slice tests are lightweight, focused and faster
+- Relies on mocks or custom beans
+- `@WebMvcTest`, `@DataJpaTest`
+    - Custom slices, with `@SpringBootTest(classes = ...)`
 
 ---
 
@@ -202,7 +233,10 @@ Search "Devoxx testing", sort by "most views" :)
 
 <br>
 
-**TODO**
+- Great setup @ `start.spring.io`
+- Auto-configuration support with `@ServiceConnection`
+    - Postgres, Otlp..., Redis, Rabbit...
+- Dynamic configuration support with `@DynamicPropertySource`
 
 ---
 
@@ -223,7 +257,18 @@ Search "Devoxx testing", sort by "most views" :)
 
 <br>
 
-**TODO**
+- `awaitility` for waiting and polling
+    - Do not, ever, use `Thread.sleep`*
+
+<br>
+
+- Know how to configure `mockito`
+
+<br>
+<br>
+<br>
+
+<small>* except when, you know, It Depends™</small>
 
 ---
 
@@ -240,11 +285,18 @@ Search "Devoxx testing", sort by "most views" :)
 
 ---
 
-# ⚙️ Testing `@ConfigurationProperties`
+## ⚙️ Testing `@ConfigurationProperties`
 
 <br>
 
-**TODO**
+- Construct property objects and validate those
+    - `Validation.buildDefaultValidatorFactory().getValidator()`
+    - Consider using YAML
+
+- For integration testing:
+    - Use `@ExtendWith(SpringExtension.class)` + `@Configuration`
+    - For failures, `SpringApplicationBuilder#run`
+
 
 ---
 
@@ -265,7 +317,17 @@ Search "Devoxx testing", sort by "most views" :)
 
 <br>
 
-**TODO**
+- Compatible with `@WebMvcTest`
+- `@WithMockUser` for injecting simple users
+    - `@WithUserDetailsService`
+
+<br>
+
+- `SecurityMockMvcRequestPostProcessors` for `MockMvc(Tester)`
+    - `.csrf()`, `.opaqueToken()`, `.oidcLogin()` ...
+    - ... and more!
+
+
 
 
 ---
@@ -277,6 +339,10 @@ Reach out:
 - <logos-mastodon-icon /> @Kehrlann@hachyderm.io
 - <logos-twitter /> @Kehrlann
 - <fluent-emoji-flat-envelope-with-arrow /> daniel.garnier-moiroux@broadcom.com
+
+---
+
+<img src="/promo-graalvm.png" style="width: 1000px;" />
 
 ---
 layout: image-right
