@@ -237,6 +237,7 @@ Search "Devoxx testing", sort by "most views" :)
 - Auto-configuration support with `@ServiceConnection`
     - Postgres, Otlp..., Redis, Rabbit...
 - Dynamic configuration support with `@DynamicPropertySource`
+- Singleton pattern with `static` containers!
 
 ---
 
@@ -326,8 +327,6 @@ Search "Devoxx testing", sort by "most views" :)
 - `SecurityMockMvcRequestPostProcessors` for `MockMvc(Tester)`
     - `.csrf()`, `.opaqueToken()`, `.oidcLogin()` ...
     - ... and more!
-
-
 
 
 ---
