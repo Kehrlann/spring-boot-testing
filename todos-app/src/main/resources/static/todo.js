@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelector("#toggle-all").addEventListener("click",
         (evt) => {
-                displayed = !displayed;
+            displayed = !displayed;
             for (const description of document.querySelectorAll(`[data-role="description"]`)) {
                 description.style.display = displayed ? "inline" : "none";
             }

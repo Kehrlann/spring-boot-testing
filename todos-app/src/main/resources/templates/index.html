@@ -43,7 +43,10 @@
             <form th:action="'/todo/' + ${todo.id()} + '/delete'" method="POST">
                 <button type="submit">Complete</button>
             </form>
-            <span th:text="${todo.description()}" data-role="description" class="description"></span>
+            <span th:if="${todo.description() != null && !todo.description().isEmpty()}"
+                  th:text="${todo.description() != null ? todo.description() : ''}"
+                  data-role="description"
+                  class="description"></span>
         </div>
     </li>
 </ul>
@@ -69,7 +72,7 @@
     <label for="search-input">Search by:</label>
     <input type="text" name="q" id="search-input" th:value="${param.q}"/>
     <button id="search-button" type="submit">Search!</button>
-    <button id="clear-button" >Clear!</button>
+    <button id="clear-button">Clear!</button>
 </form>
 
 </body>
