@@ -32,10 +32,16 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesBindEx
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.env.YamlPropertySourceLoader;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.system.CapturedOutput;
+import org.springframework.boot.test.system.OutputCaptureExtension;
+import org.springframework.context.ApplicationContextInitializer;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -307,6 +313,73 @@ class TodoPropertiesTests {
 		@Configuration
 		@EnableConfigurationProperties(TodoProperties.class)
 		static class PropertiesLoader {
+
+		}
+
+	}
+
+	@Nested
+	@ExtendWith(OutputCaptureExtension.class)
+	@ExtendWith(SpringExtension.class)
+	@ContextConfiguration(initializers = SpringExtensionYamlTests.YamlPropsInitializer.class)
+	@Order(6)
+	class SpringExtensionYamlTests {
+
+		@Autowired
+		TodoProperties properties;
+
+		static Instant start;
+
+		@BeforeAll
+		static void beforeAll() {
+			start = Instant.now();
+		}
+
+		@AfterAll
+		static void afterAll() {
+			System.out.printf("~~~~~~~~~> done in %sms%n", Duration.between(start, Instant.now()).toMillis());
+		}
+
+		@Test
+		void loads() {
+			assertThat(properties.getProfiles().get(0).internalUser().email()).isEqualTo("git@garnier.wf");
+		}
+
+		@Test
+		void printsProfileCount(CapturedOutput output) {
+			assertThat(output.getOut()).contains("found 1 profile(s)");
+		}
+
+		@Configuration
+		@Import(TodoPropertiesConfiguration.class)
+		static class PropertiesLoader {
+
+		}
+
+		static class YamlPropsInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+
+			@Override
+			public void initialize(ConfigurableApplicationContext applicationContext) {
+				var config = new ByteArrayResource("""
+						todo:
+						  profiles:
+						  - name: xxx
+						    internal-user:
+						      email: git@garnier.wf
+						      password: some-password
+						      first-name: Daniel
+						      last-name: Garnier-Moiroux
+						""".getBytes(StandardCharsets.UTF_8));
+
+				List<PropertySource<?>> propertySources = null;
+				try {
+					propertySources = new YamlPropertySourceLoader().load("env-from-inline-test", config);
+				}
+				catch (IOException e) {
+				}
+
+				applicationContext.getEnvironment().getPropertySources().addFirst(propertySources.get(0));
+			}
 
 		}
 
