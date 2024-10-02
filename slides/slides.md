@@ -23,7 +23,7 @@ Devoxx Belgium, 2024-10-07
 
 ---
 layout: image-right
-image: /daniel-intro.jpg
+image: /daniel-intro.webp
 hideInToc: true
 class: smaller
 ---
@@ -62,6 +62,11 @@ Software Engineer @ Broadcom
 This talk is **NOT** about how to architect your tests.
 
 Search "Devoxx testing", sort by "most views" :)
+
+---
+layout: image
+image: /spring-logo.webp
+---
 
 ---
 
