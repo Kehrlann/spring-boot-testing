@@ -300,7 +300,7 @@ image: /spring-logo.webp
     - Consider using YAML
 
 - For integration testing:
-    - Use `@ExtendWith(SpringExtension.class)` + `@Configuration`
+    - Use `@SpringBootTest(classes = { ... })`
     - For failures, `SpringApplicationBuilder#run`
 
 
