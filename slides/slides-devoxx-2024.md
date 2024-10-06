@@ -109,7 +109,7 @@ image: /spring-logo.webp
 - `WebEnvironment.RANDOM_PORT` full webserver (e.g. Tomcat)
   - Good for deep testing (e.g. session persistence)
   - Useful for debugging
-  - `@LocalServerPort`, `WebTestClient` or `TestRestTemplate`
+  - `@LocalServerPort` <small>(also `WebTestClient` / `TestRestTemplate`)</small>
 
 ---
 
