@@ -336,30 +336,29 @@ image: /spring-logo.webp
 
 ---
 
-Repo:
-- <logos-github-icon /> https://github.com/Kehrlann/spring-boot-testing
+# References
+
+
+#### **<logos-github-icon /> https://github.com/Kehrlann/spring-boot-testing**
+
+<br>
+
+<!-- ouch the hack -->
+<!-- https://mobile.devoxx.com/events/dvbe23/talks/2943/details -->
+<div style="float:right; margin-right: 50px; text-align: center;">
+  <img src="/qr-code.png" style="margin-bottom: -45px; margin-top: -15px;" >
+</div>
+
+
 
 Reach out:
 - <logos-mastodon-icon /> @Kehrlann@hachyderm.io
 - <logos-twitter /> @Kehrlann
-- <fluent-emoji-flat-envelope-with-arrow /> daniel.garnier-moiroux@broadcom.com
+- <fluent-emoji-flat-envelope-with-arrow /> contact@garnier.wf
 
 ---
 
 <img src="/promo-graalvm.png" style="width: 1000px;" />
-
----
-layout: image-right
-image: /qr-code.png
----
-
-# 🤔 Questions?
-
-<br>
-
-Also, feedback please 👉👉
-
-It helps a lot 🙇
 
 
 ---
