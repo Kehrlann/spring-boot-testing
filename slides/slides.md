@@ -77,8 +77,8 @@ image: /spring-logo.webp
 1. 🧰 Testing toolbox!
 1. 🍕 Slice tests: slimmer ApplicationContext
 1. 📦 Testcontainers
-1. ⚙️ Testing `@ConfigurationProperties`
 1. 🧰 Testing toolbox!
+1. ⚙️ Testing `@ConfigurationProperties`
 1. 🔐 Security testing: utility methods
 
 ---
@@ -90,8 +90,8 @@ image: /spring-logo.webp
 1. 🧰 Testing toolbox!
 1. 🍕 Slice tests: slimmer ApplicationContext
 1. 📦 Testcontainers
-1. ⚙️ Testing `@ConfigurationProperties`
 1. 🧰 Testing toolbox!
+1. ⚙️ Testing `@ConfigurationProperties`
 1. 🔐 Security testing: utility methods
 
 ---
@@ -130,8 +130,8 @@ image: /spring-logo.webp
 1. 🧰 Testing toolbox!
 1. 🍕 Slice tests: slimmer ApplicationContext
 1. 📦 Testcontainers
-1. ⚙️ Testing `@ConfigurationProperties`
 1. 🧰 Testing toolbox!
+1. ⚙️ Testing `@ConfigurationProperties`
 1. 🔐 Security testing: utility methods
 
 ---
@@ -164,8 +164,8 @@ image: /spring-logo.webp
 1. **🧰 Testing toolbox!**
 1. 🍕 Slice tests: slimmer ApplicationContext
 1. 📦 Testcontainers
-1. ⚙️ Testing `@ConfigurationProperties`
 1. 🧰 Testing toolbox!
+1. ⚙️ Testing `@ConfigurationProperties`
 1. 🔐 Security testing: utility methods
 
 ---
@@ -204,8 +204,8 @@ image: /spring-logo.webp
 1. 🧰 Testing toolbox!
 1. **🍕 Slice tests: slimmer ApplicationContext**
 1. 📦 Testcontainers
-1. ⚙️ Testing `@ConfigurationProperties`
 1. 🧰 Testing toolbox!
+1. ⚙️ Testing `@ConfigurationProperties`
 1. 🔐 Security testing: utility methods
 
 ---
