@@ -74,7 +74,7 @@ class TodoMockMvcTests {
 	private MockMvcTester tester;
 
 	@Test
-	void assertJ() throws Exception {
+	void assertJ() {
 		var resp = tester
 			.perform(post("/todo").param("text", "hello devoxx").param("description", "it's good to be with you!"));
 		assertThat(resp).hasStatus(HttpStatus.FOUND);

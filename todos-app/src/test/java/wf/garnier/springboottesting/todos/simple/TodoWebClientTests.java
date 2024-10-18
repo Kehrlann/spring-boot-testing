@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -122,6 +122,25 @@ class TodoWebClientTests {
 		var todos = page.querySelectorAll("[data-role=\"text\"]").stream().map(DomNode::getTextContent);
 
 		assertThat(todos).hasSize(3);
+	}
+
+	@Test
+	void parseString() throws IOException {
+		var htmlString = """
+				<html>
+				<body>
+				  <h1>Hello world</h1>
+				  <ul>
+				    <li class="todo">One</li>
+				    <li class="todo">Two</li>
+				    <li class="todo">three</li>
+				  </ul>
+				</body>
+				</html>
+				""";
+		HtmlPage page = webClient.loadHtmlCodeIntoCurrentWindow(htmlString);
+		var textContent = page.querySelector("li.todo:last-child").getTextContent();
+		assertThat(textContent).isEqualTo("three");
 	}
 
 }
