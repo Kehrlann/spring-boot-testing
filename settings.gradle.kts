@@ -8,8 +8,8 @@ pluginManagement {
         gradlePluginPortal()
     }
     plugins {
-        id("org.springframework.boot") version "3.4.0-M2"
-        id("io.spring.dependency-management") version "1.1.5"
+        id("org.springframework.boot") version "3.4.0-RC1"
+        id("io.spring.dependency-management") version "1.1.6"
         id("io.spring.javaformat") version "0.0.43"
     }
 }
