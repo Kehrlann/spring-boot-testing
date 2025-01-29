@@ -73,9 +73,20 @@ Repo:
 - <logos-github-icon /> https://github.com/Kehrlann/spring-boot-testing
 
 Reach out:
-- <logos-mastodon-icon /> @Kehrlann@hachyderm.io
-- <logos-twitter /> @Kehrlann
-- <fluent-emoji-flat-envelope-with-arrow /> daniel.garnier-moiroux@broadcom.com
+- <logos-bluesky /> @garnier.wf
+- <logos-firefox /> https://garnier.wf/
+- <fluent-emoji-flat-envelope-with-arrow /> contact@garnier.wf
+
+---
+layout: image-right
+image: /qr-code-youtube.png
+---
+
+## Now on <a href="https://www.youtube.com/watch?v=u5foQULTxHM">Youtube</a>!
+
+Spring Boot testing: Zero to Hero
+
+@ Devoxx Belgium 2024
 
 ---
 layout: image-right
