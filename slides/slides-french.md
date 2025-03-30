@@ -9,7 +9,6 @@ css: unocss
 aspectRatio: "16/9"
 colorSchema: "light"
 canvasWidth: 1024
-hideInToc: true
 ---
 
 # **Tester vos apps Spring Boot**
@@ -26,7 +25,6 @@ Devoxx France, 2025-04-18
 ---
 layout: image-right
 image: /daniel-intro.jpg
-hideInToc: true
 class: smaller
 ---
 
@@ -68,7 +66,7 @@ image: /spring-logo.webp
 1. 🍕 Slice tests: ApplicationContext, version "ultra-léger"
 1. 📦 Testcontainers
 1. 🧰 Boîte à outils des tests!
-1. ⚙️ Tester les `@ConfigurationProperties`
+1. ⚙️ Test des `@ConfigurationProperties`
 1. 🔐 Tests de la couche sécurité
 
 ---
@@ -81,7 +79,7 @@ image: /spring-logo.webp
 1. 🍕 Slice tests: ApplicationContext, version "ultra-léger"
 1. 📦 Testcontainers
 1. 🧰 Boîte à outils des tests!
-1. ⚙️ Tester les `@ConfigurationProperties`
+1. ⚙️ Test des `@ConfigurationProperties`
 1. 🔐 Tests de la couche sécurité
 
 ---
@@ -122,7 +120,7 @@ image: /spring-logo.webp
 1. 🍕 Slice tests: ApplicationContext, version "ultra-léger"
 1. 📦 Testcontainers
 1. 🧰 Boîte à outils des tests!
-1. ⚙️ Tester les `@ConfigurationProperties`
+1. ⚙️ Test des `@ConfigurationProperties`
 1. 🔐 Tests de la couche sécurité
 
 ---
@@ -156,7 +154,7 @@ image: /spring-logo.webp
 1. 🍕 Slice tests: ApplicationContext, version "ultra-léger"
 1. 📦 Testcontainers
 1. 🧰 Boîte à outils des tests!
-1. ⚙️ Tester les `@ConfigurationProperties`
+1. ⚙️ Test des `@ConfigurationProperties`
 1. 🔐 Tests de la couche sécurité
 
 ---
@@ -196,7 +194,7 @@ image: /spring-logo.webp
 1. **🍕 Slice tests: ApplicationContext, version "ultra-léger**
 1. 📦 Testcontainers
 1. 🧰 Boîte à outils des tests!
-1. ⚙️ Tester les `@ConfigurationProperties`
+1. ⚙️ Test des `@ConfigurationProperties`
 1. 🔐 Tests de la couche sécurité
 
 ---
@@ -220,7 +218,7 @@ image: /spring-logo.webp
 1. 🍕 Slice tests: ApplicationContext, version "ultra-léger"
 1. **📦 Testcontainers**
 1. 🧰 Boîte à outils des tests!
-1. ⚙️ Tester les `@ConfigurationProperties`
+1. ⚙️ Test des `@ConfigurationProperties`
 1. 🔐 Tests de la couche sécurité
 
 ---
@@ -245,7 +243,7 @@ image: /spring-logo.webp
 1. 🍕 Slice tests: ApplicationContext, version "ultra-léger"
 1. 📦 Testcontainers
 1. **🧰 Boîte à outils des tests!**
-1. ⚙️ Tester les `@ConfigurationProperties`
+1. ⚙️ Test des `@ConfigurationProperties`
 1. 🔐 Tests de la couche sécurité
 
 ---
@@ -277,22 +275,22 @@ image: /spring-logo.webp
 1. 🍕 Slice tests: ApplicationContext, version "ultra-léger"
 1. 📦 Testcontainers
 1. 🧰 Boîte à outils des tests!
-1. **⚙️ Tester les `@ConfigurationProperties`**
+1. **⚙️ Test des `@ConfigurationProperties`**
 1. 🔐 Tests de la couche sécurité
 
 ---
 
-## ⚙️ Tester les `@ConfigurationProperties`
+## ⚙️ Test des `@ConfigurationProperties`
 
 <br>
 
-- Construct property objects and validate those
+- Construire des objets property les valider
     - `Validation.buildDefaultValidatorFactory().getValidator()`
-    - Consider using YAML
+    - Utiliser du YAML?
 
-- For integration testing:
-    - Use `@SpringBootTest(classes = { ... })`
-    - For failures, `SpringApplicationBuilder#run`
+- Pour les tests d'intégration:
+    - Utiliser `@SpringBootTest(classes = { ... })`
+    - Pour les exceptions, utiliser `SpringApplicationBuilder#run`
 
 
 ---
@@ -305,7 +303,7 @@ image: /spring-logo.webp
 1. 🍕 Slice tests: ApplicationContext, version "ultra-léger"
 1. 📦 Testcontainers
 1. 🧰 Boîte à outils des tests!
-1. ⚙️ Tester les `@ConfigurationProperties`
+1. ⚙️ Test des `@ConfigurationProperties`
 1. **🔐 Tests de la couche sécurité
 
 ---
@@ -314,15 +312,15 @@ image: /spring-logo.webp
 
 <br>
 
-- Compatible with `@WebMvcTest`
-- `@WithMockUser` for injecting simple users
+- Compatible avec `@WebMvcTest` & `@SpringBootTest`
+- `@WithMockUser` pour injecter un utilisateur
     - `@WithUserDetailsService`
 
 <br>
 
-- `SecurityMockMvcRequestPostProcessors` for `MockMvc(Tester)`
+- `SecurityMockMvcRequestPostProcessors` pour `MockMvc(Tester)`
     - `.csrf()`, `.opaqueToken()`, `.oidcLogin()` ...
-    - ... and more!
+    - ... et plus encore!
 
 
 ---
@@ -341,240 +339,16 @@ image: /spring-logo.webp
 </div>
 
 
-
-Reach out:
-- <logos-mastodon-icon /> @Kehrlann@hachyderm.io
-- <logos-twitter /> @Kehrlann
+Faites-moi signe!
+- <logos-bluesky /> @garnier.wf
+- <logos-firefox /> https://garnier.wf/
 - <fluent-emoji-flat-envelope-with-arrow /> contact@garnier.wf
 
 ---
-
-<img src="/promo-graalvm.png" style="width: 1000px;" />
-
-
----
-layout: image-right
-image: /dep-tree-1.png
+layout: image
+image: /meet-me.jpg
+class: end
 ---
 
-## Mocking
-
-A dependency tree
-
----
-layout: image-right
-image: /dep-tree-2.png
----
-
-## Mocking
-
-Obvious unit-tests
-
----
-layout: image-right
-image: /dep-tree-3.png
----
-
-## Mocking
-
-Obvious mocks
-
----
-layout: image-right
-image: /dep-tree-3.png
----
-
-## Mocking
-
-Obvious mocks
-
-<sub><i>(caveat: testcontainers!)</i></sub>
-
----
-layout: image-right
-image: /dep-tree-4.png
----
-
-## Mocking
-
-Non-obvious strategy ...
-
-
----
-layout: image-right
-image: /dep-tree-5.png
----
-
-## Mocking
-
-London-Style TDD
-- (aka Outside-In)
-- (aka Mockist)
-
-Lots of mocks, small units
-
----
-layout: image-right
-image: /dep-tree-6.png
----
-
-## Mocking
-
-London-Style TDD
-- (aka Outside-In)
-- (aka Mockist)
-
-Lots of mocks, small units
-
----
-layout: image-right
-image: /dep-tree-7.png
----
-
-## Mocking
-
-London-Style TDD
-- (aka Outside-In)
-- (aka Mockist)
-
-Lots of mocks, small units
-
----
-layout: image-right
-image: /dep-tree-7.png
----
-
-## Mocking
-
-London-Style TDD
-
-Advantages:
-- Small "units" in unit tests
-- Clear, focused tests
-
-Drawbacks:
-- Maintain mocks: expensive
-- Lack of "integration" tests
-
----
-layout: image-right
-image: /dep-tree-8.png
----
-
-## Mocking
-
-London-Style TDD
-
-Recommendation:
-- Delete mock tests
-- Add "bigger unit" tests, "component tests", "integration tests" (not fully e2e)
-
----
-layout: image-right
-image: /dep-tree-9.png
----
-
-## Mocking
-
-Detroit-Style TDD
-- (aka Inside-Out)
-- (aka Classicist)
-
-No mocks, real objects, bigger units
-
----
-layout: image-right
-image: /dep-tree-10.png
----
-
-## Mocking
-
-Detroit-Style TDD
-- (aka Inside-Out)
-- (aka Classicist)
-
-No mocks, real objects, bigger units
-
----
-layout: image-right
-image: /dep-tree-11.png
----
-
-## Mocking
-
-Detroit-Style TDD
-- (aka Inside-Out)
-- (aka Classicist)
-
-No mocks, real objects, bigger units
-
----
-layout: image-right
-image: /dep-tree-12.png
----
-
-## Mocking
-
-Detroit-Style TDD
-- (aka Inside-Out)
-- (aka Classicist)
-
-No mocks, real objects, bigger units
-
----
-layout: image-right
-image: /dep-tree-13.png
----
-
-## Mocking
-
-Detroit-Style TDD
-- (aka Inside-Out)
-- (aka Classicist)
-
-No mocks, real objects, bigger units
-
----
-layout: image-right
-image: /dep-tree-14.png
----
-
-## Mocking
-
-Detroit-Style TDD
-- (aka Inside-Out)
-- (aka Classicist)
-
-No mocks, real objects, bigger units
-
----
-layout: image-right
-image: /dep-tree-14.png
----
-
-## Mocking
-
-Detroit-Style TDD
-
-Advantages:
-- Decouple test from implementation, cheaper
-
-Drawbacks:
-- Bigger and bigger units
-- Complicated setup
-- Multiple classes under test
-
-
----
-layout: image-right
-image: /dep-tree-8.png
----
-
-## Mocking
-
-Detroit-Style TDD
-
-Recommendations:
-- Use TDD: start from the bottom
-- Add some mocks, sometimes
+# **Merci 😊**
 
