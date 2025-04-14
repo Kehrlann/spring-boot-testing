@@ -88,7 +88,7 @@ image: /spring-logo.webp
 
 <br>
 
-- `WebEnvironment.MOCK` environment "mock" servlet
+- `WebEnvironment.MOCK` environnement servlet "mock"
   - Suffisant dans la plupart des cas
 
 <br>
