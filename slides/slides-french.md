@@ -230,7 +230,7 @@ image: /spring-logo.webp
 - Setup simple avec @ `start.spring.io`
 - Configuration automatique avec `@ServiceConnection`
     - Postgres, Otlp..., Redis, Rabbit...
-- Configuration dynamique avec `@DynamicPropertySource`
+- Configuration dynamique avec `DynamicPropertyRegistrar`
 - Pattern singleton avec containers `static`
 
 ---
