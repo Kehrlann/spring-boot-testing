@@ -51,6 +51,20 @@ This talk is **NOT** about how to architect your tests.
 Search "Devoxx testing", sort by "most views" :)
 
 ---
+layout: image-right
+image: /oh-no.jpg
+hideInToc: true
+---
+
+# PSA
+
+&nbsp;
+
+Please, do **NOT** slap `@SpringBootTest` everywhere.
+
+Your domain is Spring-agnostic. Your unit tests do not need Spring Boot.
+
+---
 
 # Spring Boot Testing
 
@@ -90,7 +104,7 @@ Search "Devoxx testing", sort by "most views" :)
 - `WebEnvironment.RANDOM_PORT` full webserver (e.g. Tomcat)
   - Good for deep testing (e.g. session persistence)
   - Useful for debugging
-  - `@LocalServerPort`, `WebTestClient` or `TestRestTemplate`
+  - `@LocalServerPort`
 
 ---
 
@@ -98,7 +112,8 @@ Search "Devoxx testing", sort by "most views" :)
 
 <br>
 
-- `MockMvc` for request-based testing (only in `MOCK` mode)
+- `MockMvcTester` for request-based testing (only in `MOCK` mode)
+  - Or `MockMvc` (_so 2024_)
 - HtmlUnit's `WebClient` for (light) browser-based testing
 - Selenium for driving a real browser
 - Proper integration testing with JS tools (Playwright, Cypress)
