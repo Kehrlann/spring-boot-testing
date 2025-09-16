@@ -267,7 +267,8 @@ Your domain is Spring-agnostic. Your unit tests do not need Spring Boot.
 - Great setup @ `start.spring.io`
 - Auto-configuration support with `@ServiceConnection`
     - Postgres, Otlp..., Redis, Rabbit...
-- Dynamic configuration support with `@DynamicPropertySource`
+- Dynamic configuration support with `DynamicPropertyRegistrar`
+    - See also `@DynamicPropertySource`
 - Singleton pattern with `static` containers!
 
 ---
@@ -341,8 +342,7 @@ Your domain is Spring-agnostic. Your unit tests do not need Spring Boot.
 
 <!-- qrencode -s 9 -m 2 -o qr-code.png https://mobile.devoxx.com/events/devoxxuk25/rate-talk/2999 -->
 <div style="float:right; margin-right: 50px; text-align: center;">
-    <a href="https://openfeedback.io/vctpDk4vX1kUwUk2eh2M/2025-09-17/vSmE0dYwPcXMNnw047ca"
-    target="_blank">
+    <a href="https://openfeedback.io/vctpDk4vX1kUwUk2eh2M/2025-09-17/vSmE0dYwPcXMNnw047ca" target="_blank">
         <img src="/qr-code-ing.png" style="margin-bottom: -45px; height: 300px;" >
     </a>
 </div>
@@ -353,6 +353,25 @@ Your domain is Spring-agnostic. Your unit tests do not need Spring Boot.
 - <logos-firefox /> https://garnier.wf/
 - <fluent-emoji-flat-envelope-with-arrow /> contact@garnier.wf
 
+---
+layout: two-cols
+---
+
+<logos-youtube-icon /> YouTube (3h, Devoxx BE)
+
+<a href="https://www.youtube.com/watch?v=u5foQULTxHM" target="_blank">
+    <img src="/qr-code-youtube.png" style="margin-bottom: -45px; height: 300px;" >
+</a>
+
+::right::
+
+
+<div style="margin-left: 70px; text-align: center;">
+    <a href="https://go.bsky.app/TLqBjSF" target="_blank">
+        <img src="/qr-code-bsky-starter.png" style="height: 400px;" >
+    </a>
+</div>
+
 
 ---
 layout: image
@@ -362,4 +381,3 @@ class: end
 ---
 
 # **Merci 😊**
-
