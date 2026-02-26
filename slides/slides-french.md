@@ -96,7 +96,7 @@ image: /spring-logo.webp
 - `WebEnvironment.RANDOM_PORT` serveur web complet (e.g. Tomcat)
   - Utile pour tests en profondeur (e.g. sérialisation sessions)
   - Utile pour débugguer
-  - `@LocalServerPort`, `WebTestClient` ou `TestRestTemplate`
+  - `@LocalServerPort`, `RestTestClient` ou `WebTestClient`
 
 ---
 
@@ -104,8 +104,9 @@ image: /spring-logo.webp
 
 <br>
 
-- `MockMvc` ou `MockMvcTester` pour les tests par requête
-  - (Seulement en mode `MOCK`)
+- `MockMvcTester` ou `RestTestClient` pour les tests par requête
+  - Seulement en mode `MOCK`
+  - `MockMvc` en "legacy"
 - HtmlUnit's `WebClient` pour tests browser (légers)
 - Selenium / WebDriver pour un browser complet
 - Tests d'intégration avec des outils adaptés, typiquement Javascript (Playwright, Cypress)
@@ -304,7 +305,7 @@ image: /spring-logo.webp
 1. 📦 Testcontainers
 1. 🧰 Boîte à outils des tests!
 1. ⚙️ Test des `@ConfigurationProperties`
-1. **🔐 Tests de la couche sécurité
+1. **🔐 Tests de la couche sécurité**
 
 ---
 
