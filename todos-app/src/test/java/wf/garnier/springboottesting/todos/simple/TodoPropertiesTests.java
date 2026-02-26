@@ -18,12 +18,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestClassOrder;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.testcontainers.shaded.com.fasterxml.jackson.core.JsonParser;
-import org.testcontainers.shaded.com.fasterxml.jackson.core.JsonProcessingException;
-import tools.jackson.databind.DeserializationFeature;
 import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.PropertyNamingStrategies;
-import tools.jackson.databind.SerializationFeature;
 import tools.jackson.dataformat.yaml.YAMLMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,7 +128,7 @@ class TodoPropertiesTests {
 			.build();
 
 		@Test
-		public void empty() throws JsonProcessingException {
+		public void empty() {
 			var empty = mapper.readValue("""
 					profiles: []
 					""", TodoProperties.class);
@@ -140,7 +136,7 @@ class TodoPropertiesTests {
 		}
 
 		@Test
-		public void simple() throws JsonProcessingException {
+		public void simple() {
 			var props = mapper.readValue("""
 					profiles:
 					- name: internal
@@ -153,7 +149,7 @@ class TodoPropertiesTests {
 		}
 
 		@Test
-		public void complex() throws JsonProcessingException {
+		public void complex() {
 			var props = mapper.readValue("""
 					profiles:
 					- name: internal

@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.awaitility.Awaitility;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.shaded.org.awaitility.Awaitility;
 
 import static wf.garnier.springboottesting.todos.simple.Assertions.assertThat;
 import static wf.garnier.springboottesting.todos.simple.Assertions.assertThatLog;
