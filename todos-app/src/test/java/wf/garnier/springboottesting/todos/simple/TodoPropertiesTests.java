@@ -6,12 +6,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
-import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import org.junit.jupiter.api.AfterAll;
@@ -24,6 +18,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestClassOrder;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.testcontainers.shaded.com.fasterxml.jackson.core.JsonParser;
+import org.testcontainers.shaded.com.fasterxml.jackson.core.JsonProcessingException;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.PropertyNamingStrategies;
+import tools.jackson.databind.SerializationFeature;
+import tools.jackson.dataformat.yaml.YAMLMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.WebApplicationType;
@@ -128,8 +129,6 @@ class TodoPropertiesTests {
 
 		ObjectMapper mapper = YAMLMapper.builder()
 			.propertyNamingStrategy(PropertyNamingStrategies.KEBAB_CASE)
-			.configure(JsonParser.Feature.IGNORE_UNDEFINED, true)
-			.addModule(new ParameterNamesModule())
 			.build();
 
 		@Test

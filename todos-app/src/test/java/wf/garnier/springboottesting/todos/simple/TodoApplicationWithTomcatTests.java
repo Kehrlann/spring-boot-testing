@@ -11,20 +11,22 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.client.RestClient;
+import org.springframework.test.web.servlet.client.RestTestClient;
+import org.springframework.test.web.servlet.client.assertj.RestTestClientResponse;
 import static wf.garnier.springboottesting.todos.simple.Assertions.assertThat;
 import static wf.garnier.springboottesting.todos.simple.Assertions.assertThatLog;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import(ContainersConfiguration.class)
 @ExtendWith(OutputCaptureExtension.class)
+@AutoConfigureRestTestClient
 class TodoApplicationWithTomcatTests {
 
 	@LocalServerPort
@@ -66,16 +68,11 @@ class TodoApplicationWithTomcatTests {
 	}
 
 	@Test
-	void restTemplate(@Autowired TestRestTemplate restTemplate) throws IOException {
-		var response = restTemplate.getForObject("/", String.class);
+	void restClient(@Autowired RestTestClient client) {
+		var response = client.get().exchange();
+		var resp = RestTestClientResponse.from(response);
 
-		assertThat(response).contains("<h1>TODO</h1>");
-
-		var client = RestClient.builder(restTemplate.getRestTemplate()).baseUrl(restTemplate.getRootUri()).build();
-
-		var resp = client.get().uri("/").retrieve().body(String.class);
-		assertThat(resp).contains("<h1>TODO</h1>");
-
+		assertThat(resp).bodyText().contains("<h1>TODO</h1>");
 	}
 
 }

@@ -10,7 +10,7 @@ services:
       - '5432'
 
   authserver:
-    image: "bitnami/dex:2.37.0"
+    image: "dexidp/dex:v2.45.0"
     deploy:
       replicas: 1
     configs:
@@ -19,13 +19,9 @@ services:
     ports:
       - 5556:5556
     command:
+      - dex
       - serve
       - /opt/config/dex.yml
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:5556/.well-known/openid-configuration" ]
-      interval: 1s
-      timeout: 1s
-      retries: 5
 
 configs:
   dex_config:
@@ -34,7 +30,7 @@ configs:
       storage:
         type: sqlite3
         config:
-          file: /opt/dex.db
+          file: /var/dex/dex.db
       web:
         http: 0.0.0.0:5556
       staticClients:
