@@ -65,7 +65,6 @@ class TodoMockMvcTests {
 		assertThat(resp).redirectedUrl().isEqualTo("/");
 	}
 
-	@Test
 	void apiTest() {
 		var response = tester.post().uri("/todo").param("text", "this is a todo").exchange();
 
