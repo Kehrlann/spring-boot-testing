@@ -18,6 +18,7 @@ import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.client.RestTestClient;
 import org.springframework.test.web.servlet.client.assertj.RestTestClientResponse;
 import static wf.garnier.springboottesting.todos.simple.Assertions.assertThat;
@@ -29,50 +30,65 @@ import static wf.garnier.springboottesting.todos.simple.Assertions.assertThatLog
 @AutoConfigureRestTestClient
 class TodoApplicationWithTomcatTests {
 
-	@LocalServerPort
-	Long port;
+    @LocalServerPort
+    Long port;
 
-	WebClient webClient = new WebClient();
+    WebClient webClient = new WebClient();
 
-	private String baseUrl;
+    @Autowired
+    RestTestClient restClient;
 
-	@BeforeEach
-	void setUp() {
-		baseUrl = "http://localhost:%s/".formatted(port);
-	}
+    private String baseUrl;
 
-	@Test
-	void logsIp(CapturedOutput output) throws IOException {
-		webClient.getPage(baseUrl);
-		//@formatter:off
+    @BeforeEach
+    void setUp() {
+        baseUrl = "http://localhost:%s/".formatted(port);
+    }
+
+    @Test
+    void logsIp(CapturedOutput output) throws IOException {
+        webClient.getPage(baseUrl);
+        //@formatter:off
 		assertThat(output)
 				.hasSize(2)
 				.allSatisfy(logLine -> assertThatLog(logLine).hasIp("127.0.0.1").hasStatus(HttpStatus.OK))
 				.first()
 				.hasIp("127.0.0.1");
 		//@formatter:on;
-	}
+    }
 
-	@Test
-	void displaysPage() throws IOException {
-		HtmlPage page = webClient.getPage(baseUrl);
+    @Test
+    void displaysPage() throws IOException {
+        HtmlPage page = webClient.getPage(baseUrl);
 
-		HtmlInput input = page.querySelector("form > input");
-		HtmlButton button = (HtmlButton) page.getElementById("add-button");
+        HtmlInput input = page.querySelector("form > input");
+        HtmlButton button = (HtmlButton) page.getElementById("add-button");
 
-		input.type("this is a todo");
-		page = button.click();
+        input.type("this is a todo");
+        page = button.click();
 
-		var addedToto = page.querySelector(".todo > [data-role=\"text\"]").getTextContent();
-		assertThat(addedToto).isEqualTo("this is a todo");
-	}
+        var addedToto = page.querySelector(".todo > [data-role=\"text\"]").getTextContent();
+        assertThat(addedToto).isEqualTo("this is a todo");
+    }
 
-	@Test
-	void restClient(@Autowired RestTestClient client) {
-		var response = client.get().exchange();
-		var resp = RestTestClientResponse.from(response);
+    @Test
+    void restClient() {
+        var response = restClient.get().exchange();
+        var resp = RestTestClientResponse.from(response);
 
-		assertThat(resp).bodyText().contains("<h1>TODO</h1>");
-	}
+        assertThat(resp).bodyText().contains("<h1>TODO</h1>");
+    }
 
+    @Test
+    void notFound() {
+        var rawResponse = restClient.get().uri("/does-not-exist")
+                .accept(MediaType.TEXT_HTML)
+                .exchange();
+
+        var response = RestTestClientResponse.from(rawResponse);
+
+        assertThat(response).hasStatus(HttpStatus.NOT_FOUND)
+                .bodyText().contains("This is not the page you are looking for");
+
+    }
 }
