@@ -30,65 +30,65 @@ import static wf.garnier.springboottesting.todos.simple.Assertions.assertThatLog
 @AutoConfigureRestTestClient
 class TodoApplicationWithTomcatTests {
 
-    @LocalServerPort
-    Long port;
+	@LocalServerPort
+	Long port;
 
-    WebClient webClient = new WebClient();
+	WebClient webClient = new WebClient();
 
-    @Autowired
-    RestTestClient restClient;
+	@Autowired
+	RestTestClient restClient;
 
-    private String baseUrl;
+	private String baseUrl;
 
-    @BeforeEach
-    void setUp() {
-        baseUrl = "http://localhost:%s/".formatted(port);
-    }
+	@BeforeEach
+	void setUp() {
+		baseUrl = "http://localhost:%s/".formatted(port);
+	}
 
-    @Test
-    void logsIp(CapturedOutput output) throws IOException {
-        webClient.getPage(baseUrl);
-        //@formatter:off
+	@Test
+	void logsIp(CapturedOutput output) throws IOException {
+		webClient.getPage(baseUrl);
+		//@formatter:off
 		assertThat(output)
 				.hasSize(2)
 				.allSatisfy(logLine -> assertThatLog(logLine).hasIp("127.0.0.1").hasStatus(HttpStatus.OK))
 				.first()
 				.hasIp("127.0.0.1");
 		//@formatter:on;
-    }
+	}
 
-    @Test
-    void displaysPage() throws IOException {
-        HtmlPage page = webClient.getPage(baseUrl);
+	@Test
+	void displaysPage() throws IOException {
+		HtmlPage page = webClient.getPage(baseUrl);
 
-        HtmlInput input = page.querySelector("form > input");
-        HtmlButton button = (HtmlButton) page.getElementById("add-button");
+		HtmlInput input = page.querySelector("form > input");
+		HtmlButton button = (HtmlButton) page.getElementById("add-button");
 
-        input.type("this is a todo");
-        page = button.click();
+		input.type("this is a todo");
+		page = button.click();
 
-        var addedToto = page.querySelector(".todo > [data-role=\"text\"]").getTextContent();
-        assertThat(addedToto).isEqualTo("this is a todo");
-    }
+		var addedToto = page.querySelector(".todo > [data-role=\"text\"]").getTextContent();
+		assertThat(addedToto).isEqualTo("this is a todo");
+	}
 
-    @Test
-    void restClient() {
-        var response = restClient.get().exchange();
-        var resp = RestTestClientResponse.from(response);
+	@Test
+	void restClient() {
+		var response = restClient.get().exchange();
+		var resp = RestTestClientResponse.from(response);
 
-        assertThat(resp).bodyText().contains("<h1>TODO</h1>");
-    }
+		assertThat(resp).bodyText().contains("<h1>TODO</h1>");
+	}
 
-    @Test
-    void notFound() {
-        var rawResponse = restClient.get().uri("/does-not-exist")
-                .accept(MediaType.TEXT_HTML)
-                .exchange();
+	@Test
+	void notFound() {
+		var rawResponse = restClient.get().uri("/does-not-exist").accept(MediaType.TEXT_HTML).exchange();
 
-        var response = RestTestClientResponse.from(rawResponse);
+		var response = RestTestClientResponse.from(rawResponse);
 
-        assertThat(response).hasStatus(HttpStatus.NOT_FOUND)
-                .bodyText().contains("This is not the page you are looking for");
+		assertThat(response).hasStatus(HttpStatus.NOT_FOUND)
+			.bodyText()
+			.contains("This is not the page you are looking for");
 
-    }
+	}
+
 }

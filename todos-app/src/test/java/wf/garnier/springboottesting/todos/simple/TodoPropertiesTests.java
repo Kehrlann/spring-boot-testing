@@ -123,9 +123,7 @@ class TodoPropertiesTests {
 	@Order(2)
 	class Jackson {
 
-		ObjectMapper mapper = YAMLMapper.builder()
-			.propertyNamingStrategy(PropertyNamingStrategies.KEBAB_CASE)
-			.build();
+		ObjectMapper mapper = YAMLMapper.builder().propertyNamingStrategy(PropertyNamingStrategies.KEBAB_CASE).build();
 
 		@Test
 		public void empty() {

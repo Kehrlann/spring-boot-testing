@@ -9,11 +9,10 @@ import org.springframework.context.annotation.Bean;
 @TestConfiguration
 class ContainersConfiguration {
 
-
-    @ServiceConnection
-    @Bean
-    PostgreSQLContainer<?> postgreSQLContainer() {
-        return new PostgreSQLContainer<>("postgres:latest");
-    }
+	@ServiceConnection
+	@Bean
+	PostgreSQLContainer<?> postgreSQLContainer() {
+		return new PostgreSQLContainer<>("postgres:latest");
+	}
 
 }

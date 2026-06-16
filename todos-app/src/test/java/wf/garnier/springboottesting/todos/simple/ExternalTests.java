@@ -1,6 +1,5 @@
 package wf.garnier.springboottesting.todos.simple;
 
-
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -13,14 +12,13 @@ import static wf.garnier.springboottesting.todos.simple.Assertions.assertThat;
 @Import(ContainersConfigurationSingleton.class)
 class ExternalTests {
 
-    @Test
-    void connectToExternalService(@Value("${external.service.url:}") String externalServiceUrl) {
-        assertThat(externalServiceUrl).isNotBlank();
+	@Test
+	void connectToExternalService(@Value("${external.service.url:}") String externalServiceUrl) {
+		assertThat(externalServiceUrl).isNotBlank();
 
-        var nginxResp = RestClient.create().get().uri(externalServiceUrl)
-                .retrieve()
-                .body(String.class);
+		var nginxResp = RestClient.create().get().uri(externalServiceUrl).retrieve().body(String.class);
 
-        assertThat(nginxResp).contains("Welcome to nginx!");
-    }
+		assertThat(nginxResp).contains("Welcome to nginx!");
+	}
+
 }

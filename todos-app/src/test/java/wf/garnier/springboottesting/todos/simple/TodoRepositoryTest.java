@@ -38,7 +38,7 @@ class TodoRepositoryTest {
 		var todos = todoService.searchByKeyword("secure");
 
 		assertThat(todos).hasSize(2)
-			.map(TodoItem::text)
+			.map(TodoItem::getText)
 			.containsExactlyInAnyOrder("Talk about Spring Security", "Think about threat model");
 	}
 

@@ -34,13 +34,13 @@
 <ul>
     <li th:each="todo: ${todos}">
         <div class="todo">
-            <span th:text="${todo.text()}" data-role="text"></span>
-            <button th:disabled="${todo.description() == null || todo.description().isEmpty()}" data-role="toggle">&lt;&gt;</button>
-            <form th:action="'/todo/' + ${todo.id()} + '/delete'" method="POST">
+            <span th:text="${todo.getText()}" data-role="text"></span>
+            <button th:disabled="${todo.getDescription() == null || todo.getDescription().isEmpty()}" data-role="toggle">&lt;&gt;</button>
+            <form th:action="'/todo/' + ${todo.getId()} + '/delete'" method="POST">
                 <button type="submit">Complete</button>
             </form>
-            <span th:if="${todo.description() != null && !todo.description().isEmpty()}"
-                  th:text="${todo.description() != null ? todo.description() : ''}"
+            <span th:if="${todo.getDescription() != null && !todo.getDescription().isEmpty()}"
+                  th:text="${todo.getDescription() != null ? todo.getDescription() : ''}"
                   data-role="description"
                   class="description"></span>
         </div>

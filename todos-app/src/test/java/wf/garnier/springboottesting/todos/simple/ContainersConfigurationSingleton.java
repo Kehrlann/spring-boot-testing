@@ -14,26 +14,27 @@ import org.springframework.test.context.DynamicPropertyRegistrar;
 @Testcontainers
 class ContainersConfigurationSingleton {
 
-    @Container
-    private static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:latest");
+	@Container
+	private static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:latest");
 
-    @Container
-    private static final GenericContainer<?> nginx = new GenericContainer<>("nginx:alpine").withExposedPorts(80);
+	@Container
+	private static final GenericContainer<?> nginx = new GenericContainer<>("nginx:alpine").withExposedPorts(80);
 
-    @ServiceConnection
-    @Bean
-    PostgreSQLContainer<?> postgreSQLContainer() {
-        return postgres;
-    }
+	@ServiceConnection
+	@Bean
+	PostgreSQLContainer<?> postgreSQLContainer() {
+		return postgres;
+	}
 
-    @Bean
-    GenericContainer<?> nginxContainer() {
-        return nginx;
-    }
+	@Bean
+	GenericContainer<?> nginxContainer() {
+		return nginx;
+	}
 
-    @Bean
-    DynamicPropertyRegistrar dynamicPropertyRegistrar(GenericContainer nginxContainer) {
-        return registry -> registry.add("external.service.url", () -> "http://localhost:" + nginxContainer.getFirstMappedPort());
-    }
+	@Bean
+	DynamicPropertyRegistrar dynamicPropertyRegistrar(GenericContainer nginxContainer) {
+		return registry -> registry.add("external.service.url",
+				() -> "http://localhost:" + nginxContainer.getFirstMappedPort());
+	}
 
 }

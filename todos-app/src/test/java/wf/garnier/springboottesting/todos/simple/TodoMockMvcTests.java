@@ -69,4 +69,22 @@ class TodoMockMvcTests {
 		assertThat(resp).redirectedUrl().isEqualTo("/");
 	}
 
+	@Test
+	void apiTest() {
+		var response = tester.post().uri("/todo").param("text", "this is a todo").exchange();
+
+		assertThat(response).hasStatus(HttpStatus.FOUND);
+
+		var jsonResponse = tester.get().uri("/api/todo").exchange();
+
+		assertThat(jsonResponse).bodyJson().isLenientlyEqualTo("""
+				[
+					{
+						"text": "this is a todo",
+						"description": null
+					}
+				]
+				""");
+	}
+
 }

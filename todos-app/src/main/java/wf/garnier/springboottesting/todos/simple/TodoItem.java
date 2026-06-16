@@ -27,15 +27,15 @@ public final class TodoItem {
 
 	}
 
-	public Long id() {
+	public Long getId() {
 		return id;
 	}
 
-	public String text() {
+	public String getText() {
 		return text;
 	}
 
-	public String description() {
+	public String getDescription() {
 		return this.description;
 	}
 
