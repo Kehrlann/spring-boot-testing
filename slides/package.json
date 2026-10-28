@@ -14,7 +14,7 @@
   "devDependencies": {
     "@iconify-json/fluent-emoji-flat": "^1.1.11",
     "@iconify-json/logos": "^1.2.3",
-    "playwright-chromium": "^1.36.0"
+    "playwright-chromium": "^1.64.1"
   },
   "author": "Daniel Garnier-Moiroux <git@garnier.wf>",
   "license": "ISC"
