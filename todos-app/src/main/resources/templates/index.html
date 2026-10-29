@@ -4,6 +4,9 @@
     <meta charset="UTF-8"/>
     <title>TODO list</title>
     <style>
+        html, body {
+            height: 100%;
+        }
         #new-todo-form {
             display: flex;
             flex-flow: column;
@@ -24,6 +27,11 @@
             grid-column: 1 / 4;
             background: #eee;
             padding: 10px 5px;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
         }
     </style>
     <script src="/todo.js"></script>
@@ -71,5 +79,6 @@
     <button id="clear-button">Clear!</button>
 </form>
 
+<footer style="margin-bottom: 0;">© 2024, no agents involved</footer>
 </body>
 </html>
