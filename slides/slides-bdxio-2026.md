@@ -35,6 +35,7 @@ class: smaller
 Software Engineer
 
 - <logos-spring-icon /> Spring
+- <logos-model-context-protocol-icon /> MCP / java-sdk
 - <logos-bluesky /> @garnier.wf
 - <logos-firefox /> https://garnier.wf/
 - <logos-github-icon /> github.com/Kehrlann/
@@ -78,6 +79,7 @@ Affûter le jugement avant de déléguer.
 1. 📦 Testcontainers
 1. ⚙️ Test des `@ConfigurationProperties`
 1. 🔐 Tests de la couche sécurité
+1. 🤖 Et l'IA dans tout ça?
 
 ---
 
@@ -90,6 +92,7 @@ Affûter le jugement avant de déléguer.
 1. 📦 Testcontainers
 1. ⚙️ Test des `@ConfigurationProperties`
 1. 🔐 Tests de la couche sécurité
+1. 🤖 Et l'IA dans tout ça?
 
 ---
 
@@ -132,6 +135,7 @@ Affûter le jugement avant de déléguer.
 1. 📦 Testcontainers
 1. ⚙️ Test des `@ConfigurationProperties`
 1. 🔐 Tests de la couche sécurité
+1. 🤖 Et l'IA dans tout ça?
 
 ---
 
@@ -165,6 +169,7 @@ Affûter le jugement avant de déléguer.
 1. 📦 Testcontainers
 1. ⚙️ Test des `@ConfigurationProperties`
 1. 🔐 Tests de la couche sécurité
+1. 🤖 Et l'IA dans tout ça?
 
 ---
 
@@ -223,6 +228,7 @@ Affûter le jugement avant de déléguer.
 1. 📦 Testcontainers
 1. ⚙️ Test des `@ConfigurationProperties`
 1. 🔐 Tests de la couche sécurité
+1. 🤖 Et l'IA dans tout ça?
 
 ---
 
@@ -246,6 +252,7 @@ Affûter le jugement avant de déléguer.
 1. **📦 Testcontainers**
 1. ⚙️ Test des `@ConfigurationProperties`
 1. 🔐 Tests de la couche sécurité
+1. 🤖 Et l'IA dans tout ça?
 
 ---
 
@@ -270,6 +277,7 @@ Affûter le jugement avant de déléguer.
 1. 📦 Testcontainers
 1. **⚙️ Test des `@ConfigurationProperties`**
 1. 🔐 Tests de la couche sécurité
+1. 🤖 Et l'IA dans tout ça?
 
 ---
 
@@ -297,6 +305,7 @@ Affûter le jugement avant de déléguer.
 1. 📦 Testcontainers
 1. ⚙️ Test des `@ConfigurationProperties`
 1. **🔐 Tests de la couche sécurité**
+1. 🤖 Et l'IA dans tout ça?
 
 ---
 
@@ -313,6 +322,46 @@ Affûter le jugement avant de déléguer.
 - `SecurityMockMvcRequestPostProcessors` pour `MockMvc(Tester)`
     - `.csrf()`, `.opaqueToken()`, `.oidcLogin()` ...
     - ... et plus encore!
+
+---
+
+# Spring Boot Testing
+
+1. 🕸️ `@SpringBootTest` et tests web
+1. 🐌 `TestContext` et mise en cache
+1. 🧰 Boîte à outils des tests!
+1. 🍕 Slice tests: ApplicationContext, version "ultra-léger"
+1. 📦 Testcontainers
+1. ⚙️ Test des `@ConfigurationProperties`
+1. 🔐 Tests de la couche sécurité
+1. **🤖 Et l'IA dans tout ça?**
+
+---
+class: smaller
+---
+
+# 🤖 Et l'IA dans tout ça?
+
+
+<v-click>
+Je ne sais pas trop 🙊
+</v-click>
+
+<br>
+<br>
+
+<v-clicks depth="1">
+
+1. Les tests sont importants pour la stabilité
+2. Les tests doivent être rapides
+    - Context cache
+    - JUnit tags (`@Tag("unit")`, `@Tag("integ")`, ...)
+3. L'architecture est importante
+    - Spring Modulith?
+4. Skills
+    - https://github.com/kehrlann/spring-boot-testing-skills ??
+
+</v-clicks>
 
 
 ---
@@ -345,7 +394,7 @@ layout: two-cols-header
 
 ::left::
 
-<img src="/qr-code-book.png" style="height: 200px" >
+<img src="/qr-code-book.png" style="height: 250px; margin: auto;" >
 
 ::right::
 
@@ -355,6 +404,13 @@ Chapitres 1 à 6
 
 Gratuit!
 
+<style>
+.two-cols-header {
+    grid-template-rows: auto 1fr;
+    row-gap: 90px;
+    column-gap: 50px;
+}
+</style>
 
 ---
 layout: image
