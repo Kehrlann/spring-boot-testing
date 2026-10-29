@@ -40,7 +40,16 @@ dependencies {
 }
 
 tasks.withType<Test> {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        // Filtering by test type
+        (project.findProperty("tags") as String?)?.let {
+            includeTags(*it.split(",").toTypedArray())
+        }
+
+        // If you want a listing of tests that ran, uncomment the line below
+        testLogging { events("passed", "skipped", "failed") }
+    }
+
     // If you want to run tests at full CPU, uncomment the line below
     // maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
 }

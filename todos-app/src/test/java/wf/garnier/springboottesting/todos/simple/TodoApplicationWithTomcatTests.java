@@ -7,6 +7,7 @@ import org.htmlunit.html.HtmlButton;
 import org.htmlunit.html.HtmlInput;
 import org.htmlunit.html.HtmlPage;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -28,6 +29,7 @@ import static wf.garnier.springboottesting.todos.simple.Assertions.assertThatLog
 @Import(ContainersConfiguration.class)
 @ExtendWith(OutputCaptureExtension.class)
 @AutoConfigureRestTestClient
+@Tag("integ")
 class TodoApplicationWithTomcatTests {
 
 	@LocalServerPort

@@ -7,11 +7,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.awaitility.Awaitility;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static wf.garnier.springboottesting.todos.simple.Assertions.assertThat;
 import static wf.garnier.springboottesting.todos.simple.Assertions.assertThatLog;
 
+@Tag("unit")
 class ToolsTests {
 
 	@Nested

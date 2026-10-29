@@ -1,6 +1,7 @@
 package wf.garnier.springboottesting.todos.simple;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import static wf.garnier.springboottesting.todos.simple.Assertions.assertThat;
 @AutoConfigureMockMvc
 @AutoConfigureRestTestClient
 @Import(ContainersConfiguration.class)
+@Tag("integ")
 class TodoMockMvcTests {
 
 	@Autowired

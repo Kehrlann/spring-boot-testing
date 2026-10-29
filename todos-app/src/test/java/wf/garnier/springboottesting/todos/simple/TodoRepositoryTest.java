@@ -1,6 +1,7 @@
 package wf.garnier.springboottesting.todos.simple;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import static org.assertj.core.api.Assertions.*;
 @DataJpaTest
 @Import(ContainersConfiguration.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Tag("slice")
 class TodoRepositoryTest {
 
 	@Autowired

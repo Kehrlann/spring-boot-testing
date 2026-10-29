@@ -1,5 +1,6 @@
 package wf.garnier.springboottesting.todos.simple;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,7 @@ import static wf.garnier.springboottesting.todos.simple.Assertions.assertThat;
 
 @SpringBootTest
 @Import(ContainersConfigurationSingleton.class)
+@Tag("integ")
 class ExternalTests {
 
 	@Test

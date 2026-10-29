@@ -8,15 +8,7 @@ import java.util.List;
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.ClassOrderer;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestClassOrder;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.PropertyNamingStrategies;
@@ -54,6 +46,7 @@ class TodoPropertiesTests {
 
 	@Nested
 	@Order(1)
+	@Tag("unit")
 	class ManualBeanBuilding {
 
 		@Test
@@ -121,6 +114,7 @@ class TodoPropertiesTests {
 
 	@Nested
 	@Order(2)
+	@Tag("unit")
 	class Jackson {
 
 		ObjectMapper mapper = YAMLMapper.builder().propertyNamingStrategy(PropertyNamingStrategies.KEBAB_CASE).build();
@@ -169,6 +163,7 @@ class TodoPropertiesTests {
 
 	@Nested
 	@Order(3)
+	@Tag("slice")
 	class IntegrationTest {
 
 		static Instant start;
@@ -245,6 +240,7 @@ class TodoPropertiesTests {
 			todo.profiles[0].internal-user.last-name: Garnier-Moiroux
 			""")
 	@Order(4)
+	@Tag("slice")
 	class SpringBoot {
 
 		@Autowired
@@ -281,6 +277,7 @@ class TodoPropertiesTests {
 			todo.profiles[0].internal-user.last-name: Garnier-Moiroux
 			""")
 	@Order(5)
+	@Tag("slice")
 	class SpringExtensionTests {
 
 		@Autowired
@@ -316,6 +313,7 @@ class TodoPropertiesTests {
 	@ExtendWith(SpringExtension.class)
 	@ContextConfiguration(initializers = SpringExtensionYamlTests.YamlPropsInitializer.class)
 	@Order(6)
+	@Tag("slice")
 	class SpringExtensionYamlTests {
 
 		@Autowired
