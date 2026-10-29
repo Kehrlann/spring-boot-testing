@@ -52,6 +52,11 @@ Cette présentation ne parle pas des **tests en général**, comment les organis
 Cherchez "Devoxx tests", trier par "nombre de vues" :)
 
 ---
+layout: image
+image: /spring-logo.webp
+---
+
+---
 
 # Et les agents?
 
@@ -61,11 +66,6 @@ Ce contenu est fait pour des humains!
 
 
 Affûter le jugement avant de déléguer.
-
----
-layout: image
-image: /spring-logo.webp
----
 
 ---
 
@@ -113,9 +113,10 @@ image: /spring-logo.webp
 
 <br>
 
-- `MockMvcTester` ou `RestTestClient` pour les tests par requête
+- `MockMvcTester` pour les tests par requête
   - Seulement en mode `MOCK`
   - `MockMvc` en "legacy"
+- `RestTestClient` pour les requêtes `MOCK` et `RANDOM_PORT`
 - HtmlUnit's `WebClient` pour tests browser (légers)
 - Selenium / WebDriver pour un browser complet
 - Tests d'intégration avec des outils adaptés, typiquement Javascript (Playwright, Cypress)
